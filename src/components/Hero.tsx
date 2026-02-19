@@ -3,8 +3,7 @@
 import { useEffect, useRef } from "react";
 import { motion, type Variants, type Easing } from "framer-motion";
 
-// TODO: Replace with your actual Calendly link
-const CALENDLY_URL = "https://calendly.com/YOUR_LINK_HERE";
+const CALENDLY_URL = "https://calendly.com/speedwellai/discovery";
 
 // ─── Animated grid canvas background ─────────────────────────────────────────
 
@@ -191,7 +190,9 @@ export default function Hero() {
           className="text-lg sm:text-xl text-[#FAFAF8]/70 max-w-2xl mx-auto leading-relaxed mb-10"
         >
           Speedwell AI helps small and mid-sized businesses identify, implement,
-          and optimize AI automations — without the enterprise price tag.
+          and optimize AI automations — without the enterprise price tag. Unlike
+          vendors who hand you a tool or consultancies who hand you a slide deck,
+          we stay through implementation and make sure it actually works.
         </motion.p>
 
         {/* CTAs — primary dominates, secondary is clearly ghost/subordinate */}

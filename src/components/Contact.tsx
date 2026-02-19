@@ -4,8 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
 
-// TODO: Replace with your actual Calendly link
-const CALENDLY_URL = "https://calendly.com/YOUR_LINK_HERE";
+const CALENDLY_URL = "https://calendly.com/speedwellai/discovery";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -256,6 +255,9 @@ export default function Contact() {
                   </>
                 )}
               </button>
+              <p className="text-xs text-[#FAFAF8]/40 mt-1">
+                <span className="text-[#00C9A7]">✓</span> We respond to all inquiries within 1 business day.
+              </p>
             </form>
           )}
         </FadeUp>

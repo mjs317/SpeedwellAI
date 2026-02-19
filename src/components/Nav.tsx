@@ -5,8 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { SpeedwellLogo } from "@/components/SpeedwellLogo";
 
-// TODO: Replace with your actual Calendly link
-const CALENDLY_URL = "https://calendly.com/YOUR_LINK_HERE";
+const CALENDLY_URL = "https://calendly.com/speedwellai/discovery";
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },

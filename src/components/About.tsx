@@ -56,9 +56,12 @@ export default function About() {
         {/* Bio copy — no placeholder brackets, plain body weight */}
         <FadeUp delay={0.2}>
           <p className="text-[#6B7280] text-base sm:text-lg leading-relaxed mb-5 text-center">
-            Speedwell AI was founded by Michael, a Big 4 assurance professional
-            and AI specialist who saw firsthand how much time and money small
-            businesses lose to manual, repetitive work.
+            Speedwell AI was founded by Michael, a former Big 4 assurance
+            professional and AI specialist who spent years inside enterprise
+            organizations — helping global companies identify inefficiencies,
+            streamline operations, and implement technology at scale. He saw
+            firsthand how transformative the right automation could be, and how
+            little of that thinking ever reached small and mid-sized businesses.
           </p>
           <p className="text-[#6B7280] text-base sm:text-lg leading-relaxed text-center">
             We exist to close that gap — with practical tools, real

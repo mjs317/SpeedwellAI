@@ -27,7 +27,7 @@ const steps: Step[] = [
   {
     number: "02",
     title: "Implementation",
-    price: "$7,500 – $20,000",
+    price: "Fixed-price proposal after assessment",
     description: "We build. You grow.",
     detail:
       "We build and deploy the automations. Fixed-price, scoped from your assessment. No scope creep, no surprise invoices — just working software.",
@@ -35,7 +35,7 @@ const steps: Step[] = [
   {
     number: "03",
     title: "Optimization Retainer",
-    price: "$1,500 – $2,500 / mo",
+    price: "Flexible monthly plans — most clients start under $2k/mo",
     description: "Stay ahead, continuously.",
     detail:
       "Ongoing support, new builds, staff training, and quarterly reviews. Your automations improve as your business grows.",
