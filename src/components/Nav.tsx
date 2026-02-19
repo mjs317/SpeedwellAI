@@ -1,0 +1,129 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+
+// TODO: Replace with your actual Calendly link
+const CALENDLY_URL = "https://calendly.com/YOUR_LINK_HERE";
+
+const navLinks = [
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Services", href: "#services" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
+
+/** Minimal sticky nav with blur-on-scroll and mobile drawer */
+export default function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Add backdrop shadow once user scrolls past 20px
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
+
+  const closeMobile = () => setMobileOpen(false);
+
+  return (
+    <>
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className={[
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          scrolled
+            ? "bg-[#0F1B2D]/95 backdrop-blur-md shadow-lg shadow-black/20"
+            : "bg-transparent",
+        ].join(" ")}
+      >
+        <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+          {/* ── Logo ── */}
+          <a href="#" className="flex items-center gap-2 group" aria-label="Speedwell AI home">
+            {/* Teal spark icon */}
+            <span
+              className="w-2.5 h-2.5 rounded-full bg-[#00C9A7] shadow-[0_0_8px_2px_rgba(0,201,167,0.5)] group-hover:scale-125 transition-transform"
+              aria-hidden="true"
+            />
+            <span className="text-[#FAFAF8] font-semibold text-lg tracking-tight">
+              Speedwell <span className="text-[#00C9A7]">AI</span>
+            </span>
+          </a>
+
+          {/* ── Desktop links ── */}
+          <ul className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="text-sm text-[#FAFAF8]/70 hover:text-[#FAFAF8] transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* ── CTA + Mobile toggle ── */}
+          <div className="flex items-center gap-4">
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-[#00C9A7] text-[#0F1B2D] text-sm font-semibold hover:bg-[#00a88c] transition-colors duration-200"
+            >
+              Book a Free Call
+            </a>
+
+            {/* Mobile hamburger */}
+            <button
+              onClick={() => setMobileOpen((v) => !v)}
+              className="md:hidden text-[#FAFAF8] p-1"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            >
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
+        </nav>
+      </motion.header>
+
+      {/* ── Mobile drawer ── */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-x-0 top-16 z-40 bg-[#0F1B2D] border-t border-white/10 px-6 py-6 flex flex-col gap-5"
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={closeMobile}
+                className="text-[#FAFAF8] text-base font-medium hover:text-[#00C9A7] transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMobile}
+              className="mt-2 inline-flex justify-center items-center px-4 py-3 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold hover:bg-[#00a88c] transition-colors"
+            >
+              Book a Free Call
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/* ============================================
+   Speedwell AI – Global Styles
+   Brand colors: Navy #0F1B2D | White #FAFAF8 | Teal #00C9A7
+   ============================================ */
+
+@theme inline {
+  /* Brand color tokens */
+  --color-navy:      #0F1B2D;
+  --color-navy-light: #162338;
+  --color-navy-dark:  #080f1a;
+  --color-teal:      #00C9A7;
+  --color-teal-dark: #00a88c;
+  --color-warm-white: #FAFAF8;
+  --color-muted:     #6B7280;
+
+  /* Semantic mappings */
+  --color-background: #FAFAF8;
+  --color-foreground: #0F1B2D;
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans), "Inter", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-warm-white);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove dark-mode color overrides – site uses explicit palette */
+
+/* Utility: teal glow on hover */
+.card-hover-glow {
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.card-hover-glow:hover {
+  box-shadow: 0 0 0 1px #00C9A7, 0 8px 32px rgba(0, 201, 167, 0.12);
+  border-color: #00C9A7;
+  transform: translateY(-2px);
+}
