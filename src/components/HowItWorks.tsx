@@ -78,8 +78,8 @@ export default function HowItWorks() {
       className="bg-[#0F1B2D] py-24 px-6 lg:px-8"
     >
       <div className="max-w-6xl mx-auto">
-        {/* Section header */}
-        <FadeUp className="text-center mb-16">
+        {/* Section header — mb reduced from 16→8 to cut dead space before cards */}
+        <FadeUp className="text-center mb-8">
           <p className="text-[#00C9A7] text-sm font-semibold tracking-widest uppercase mb-3">
             How It Works
           </p>

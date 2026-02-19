@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { SpeedwellLogo } from "@/components/SpeedwellLogo";
 
 // TODO: Replace with your actual Calendly link
 const CALENDLY_URL = "https://calendly.com/YOUR_LINK_HERE";
@@ -42,16 +43,9 @@ export default function Nav() {
         ].join(" ")}
       >
         <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
-          {/* ── Logo ── */}
-          <a href="#" className="flex items-center gap-2 group" aria-label="Speedwell AI home">
-            {/* Teal spark icon */}
-            <span
-              className="w-2.5 h-2.5 rounded-full bg-[#00C9A7] shadow-[0_0_8px_2px_rgba(0,201,167,0.5)] group-hover:scale-125 transition-transform"
-              aria-hidden="true"
-            />
-            <span className="text-[#FAFAF8] font-semibold text-lg tracking-tight">
-              Speedwell <span className="text-[#00C9A7]">AI</span>
-            </span>
+          {/* ── Logo (Option 3 Wordmark) ── */}
+          <a href="#" className="flex items-center" aria-label="Speedwell AI home">
+            <SpeedwellLogo variant="dark" size="1.1rem" />
           </a>
 
           {/* ── Desktop links ── */}

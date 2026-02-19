@@ -194,23 +194,25 @@ export default function Hero() {
           and optimize AI automations — without the enterprise price tag.
         </motion.p>
 
-        {/* CTAs */}
+        {/* CTAs — primary dominates, secondary is clearly ghost/subordinate */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={0.45}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3"
         >
+          {/* Primary — full-width on mobile, teal filled */}
           <a
             href="#contact"
             className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold text-base hover:bg-[#00a88c] transition-colors duration-200 shadow-lg shadow-[#00C9A7]/20"
           >
             Get Your AI Assessment
           </a>
+          {/* Secondary — ghost, shorter height, clearly subordinate */}
           <a
             href="#how-it-works"
-            className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-3.5 rounded-lg border border-[#FAFAF8]/20 text-[#FAFAF8] font-medium text-base hover:border-[#FAFAF8]/50 hover:bg-[#FAFAF8]/5 transition-all duration-200"
+            className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-2.5 rounded-lg border border-[#FAFAF8]/25 text-[#FAFAF8]/75 font-medium text-sm hover:border-[#FAFAF8]/50 hover:text-[#FAFAF8] hover:bg-[#FAFAF8]/5 transition-all duration-200"
           >
             See How It Works
           </a>

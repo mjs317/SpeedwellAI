@@ -238,11 +238,11 @@ export default function Contact() {
                 </div>
               )}
 
-              {/* Submit */}
+              {/* Submit — full-width on mobile, matches primary CTA style */}
               <button
                 type="submit"
                 disabled={state === "submitting"}
-                className="self-start inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold text-sm hover:bg-[#00a88c] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-bold text-base hover:bg-[#00a88c] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#00C9A7]/20"
               >
                 {state === "submitting" ? (
                   <>

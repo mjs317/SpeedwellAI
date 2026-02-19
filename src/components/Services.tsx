@@ -101,13 +101,14 @@ export default function Services() {
           </p>
         </FadeUp>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Cards grid — 2-col on mobile, 3-col on desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {services.map((service, i) => {
             const Icon = service.icon;
             return (
               <FadeUp key={service.title} delay={0.05 + (i % 3) * 0.08}>
-                <div className="card-hover-glow h-full flex flex-col gap-4 p-6 rounded-2xl border border-[#0F1B2D]/10 bg-white cursor-default">
+                {/* Reduced padding on mobile so 2-col cards breathe */}
+                <div className="card-hover-glow h-full flex flex-col gap-3 p-4 sm:p-6 rounded-2xl border border-[#0F1B2D]/10 bg-white cursor-default">
                   {/* Icon */}
                   <div className="w-11 h-11 rounded-xl bg-[#00C9A7]/10 flex items-center justify-center flex-shrink-0">
                     <Icon size={20} className="text-[#00C9A7]" strokeWidth={1.8} />

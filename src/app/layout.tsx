@@ -40,7 +40,11 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: "/favicon.ico",
+    // SVG favicon (velocity chevron mark) — see /public/favicon.svg
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" }, // fallback for older browsers
+    ],
   },
 };
 

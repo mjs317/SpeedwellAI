@@ -1,6 +1,6 @@
 // ─── Speedwell AI — Single-Page Marketing Site ───────────────────────────────
 // Sections: Nav → Hero → Problem → HowItWorks → Services →
-//           WhoWeWorkWith → About → Contact → Footer
+//           WhoWeWorkWith → Testimonials → About → Contact → Footer
 
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
@@ -8,6 +8,7 @@ import ProblemSection from "@/components/ProblemSection";
 import HowItWorks from "@/components/HowItWorks";
 import Services from "@/components/Services";
 import WhoWeWorkWith from "@/components/WhoWeWorkWith";
+import Testimonials from "@/components/Testimonials";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -34,10 +35,13 @@ export default function Home() {
         {/* 5. Who We Work With — 3 persona callouts */}
         <WhoWeWorkWith />
 
-        {/* 6. About — founder section */}
+        {/* 6. Testimonials — social proof placeholder */}
+        <Testimonials />
+
+        {/* 7. About — founder section */}
         <About />
 
-        {/* 7. Contact / CTA — Calendly link + email fallback form */}
+        {/* 8. Contact / CTA — Calendly link + email fallback form */}
         <Contact />
       </main>
 

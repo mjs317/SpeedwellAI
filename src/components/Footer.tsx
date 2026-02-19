@@ -1,7 +1,7 @@
 // Footer — minimal, brand-consistent
+// Change 11: redundant "Book a Free Call" CTA removed (contact section above handles it)
 
-// TODO: Replace with your actual Calendly link
-const CALENDLY_URL = "https://calendly.com/YOUR_LINK_HERE";
+import { SpeedwellLogo } from "@/components/SpeedwellLogo";
 
 const footerLinks = [
   { label: "How It Works", href: "#how-it-works" },
@@ -17,12 +17,9 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         {/* Top row: logo + nav */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 mb-8">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2" aria-label="Speedwell AI home">
-            <span className="w-2 h-2 rounded-full bg-[#00C9A7]" aria-hidden="true" />
-            <span className="text-[#FAFAF8] font-semibold text-base tracking-tight">
-              Speedwell <span className="text-[#00C9A7]">AI</span>
-            </span>
+          {/* Logo — Option 3 Wordmark */}
+          <a href="#" className="flex items-center" aria-label="Speedwell AI home">
+            <SpeedwellLogo variant="dark" size="1rem" />
           </a>
 
           {/* Nav links */}
@@ -50,20 +47,10 @@ export default function Footer() {
         {/* Divider */}
         <div className="h-px bg-white/8 mb-6" />
 
-        {/* Bottom row: copyright + CTA */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[#FAFAF8]/30">
-            © 2026 Speedwell AI. All rights reserved.
-          </p>
-          <a
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-[#00C9A7] hover:text-[#00a88c] font-medium transition-colors"
-          >
-            Book a Free Call →
-          </a>
-        </div>
+        {/* Bottom row: copyright only */}
+        <p className="text-xs text-[#FAFAF8]/30 text-center sm:text-left">
+          © 2026 Speedwell AI. All rights reserved.
+        </p>
       </div>
     </footer>
   );

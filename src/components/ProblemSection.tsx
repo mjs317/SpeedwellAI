@@ -74,11 +74,8 @@ export default function ProblemSection() {
           </p>
         </FadeUp>
 
-        {/* Divider */}
-        <div className="mt-16 w-px h-12 bg-[#00C9A7]/30 mx-auto" aria-hidden="true" />
-
-        {/* Stats row */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6">
+        {/* Stats row — single col on mobile, 3-col on md+ */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-6">
           {stats.map((stat, i) => (
             <FadeUp key={stat.figure} delay={0.15 + i * 0.1}>
               <div className="text-center">

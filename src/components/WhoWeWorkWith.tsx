@@ -2,25 +2,24 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Zap, Settings, TrendingUp } from "lucide-react";
 
-// ─── Persona data ─────────────────────────────────────────────────────────────
+// ─── Persona data — icons removed, numbers used instead ──────────────────────
 
 const personas = [
   {
-    icon: Zap,
+    number: "01",
     title: "The Overwhelmed Owner",
     description:
       "You're doing the work of three people. You know there's a better way — you just haven't had the time to find it. We do the finding for you.",
   },
   {
-    icon: Settings,
+    number: "02",
     title: "The Lean Ops Team",
     description:
       "Your team is sharp but stretched thin. You need leverage, not more headcount. AI automation is the multiplier you've been looking for.",
   },
   {
-    icon: TrendingUp,
+    number: "03",
     title: "The Scaling Company",
     description:
       "You've grown fast and your processes haven't kept up. We help you systematize what's working so your team can focus on what's next.",
@@ -81,26 +80,30 @@ export default function WhoWeWorkWith() {
           </p>
         </FadeUp>
 
-        {/* Persona cards */}
+        {/* Persona cards — left-border style, numbered, distinct from service cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {personas.map((persona, i) => {
-            const Icon = persona.icon;
-            return (
-              <FadeUp key={persona.title} delay={0.15 + i * 0.1}>
-                <div className="flex flex-col gap-4 p-7 rounded-2xl border border-white/10 bg-white/5 hover:border-[#00C9A7]/30 transition-colors duration-300">
-                  <div className="w-11 h-11 rounded-xl bg-[#00C9A7]/10 flex items-center justify-center">
-                    <Icon size={20} className="text-[#00C9A7]" strokeWidth={1.8} />
-                  </div>
-                  <h3 className="text-base font-bold text-[#FAFAF8]">
-                    {persona.title}
-                  </h3>
-                  <p className="text-sm text-[#FAFAF8]/55 leading-relaxed">
-                    {persona.description}
-                  </p>
-                </div>
-              </FadeUp>
-            );
-          })}
+          {personas.map((persona, i) => (
+            <FadeUp key={persona.number} delay={0.15 + i * 0.1}>
+              <div className="relative overflow-hidden flex flex-col gap-3 px-6 py-7 border-l-2 border-[#00C9A7]/50 bg-white/[0.04] rounded-r-xl hover:bg-white/[0.07] hover:border-[#00C9A7]/80 transition-colors duration-300">
+                {/* Large decorative number — low-opacity teal, background element */}
+                <span
+                  className="absolute -top-3 -left-1 text-8xl font-bold leading-none select-none pointer-events-none"
+                  style={{ color: "rgba(0,201,167,0.10)" }}
+                  aria-hidden="true"
+                >
+                  {persona.number}
+                </span>
+
+                {/* Content sits above the number */}
+                <h3 className="relative text-base font-bold text-[#FAFAF8] mt-1">
+                  {persona.title}
+                </h3>
+                <p className="relative text-sm text-[#FAFAF8]/55 leading-relaxed">
+                  {persona.description}
+                </p>
+              </div>
+            </FadeUp>
+          ))}
         </div>
       </div>
     </section>
