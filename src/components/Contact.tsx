@@ -3,8 +3,9 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import { SITE_CONFIG } from "@/lib/config";
 
-const CALENDLY_URL = "https://calendly.com/speedwellai/discovery";
+const CALENDLY_URL = SITE_CONFIG.calendlyUrl;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -14,6 +15,7 @@ interface FormFields {
   name: string;
   email: string;
   company: string;
+  timeSink: string;
   message: string;
 }
 
@@ -44,6 +46,16 @@ function FadeUp({
   );
 }
 
+const timeSinkOptions = [
+  "Data entry & document processing",
+  "Email & communication management",
+  "Scheduling & calendar coordination",
+  "Reporting & data compilation",
+  "Client onboarding & follow-up",
+  "Lead management & CRM updates",
+  "Other",
+];
+
 // ─── Contact / CTA Section ────────────────────────────────────────────────────
 
 export default function Contact() {
@@ -51,13 +63,16 @@ export default function Contact() {
     name: "",
     email: "",
     company: "",
+    timeSink: "",
     message: "",
   });
   const [state, setState] = useState<FormState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -68,8 +83,7 @@ export default function Contact() {
     setErrorMsg("");
 
     try {
-      // TODO: Replace with your actual form handling endpoint or a service
-      // like Resend, Formspree, etc. The /api/contact route is a placeholder.
+      // TODO: Replace with your actual form handling endpoint (Resend, Formspree, etc.)
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -79,7 +93,7 @@ export default function Contact() {
       if (!res.ok) throw new Error("Server error");
 
       setState("success");
-      setForm({ name: "", email: "", company: "", message: "" });
+      setForm({ name: "", email: "", company: "", timeSink: "", message: "" });
     } catch {
       setState("error");
       setErrorMsg(
@@ -90,6 +104,9 @@ export default function Contact() {
 
   const inputClass =
     "w-full px-4 py-3 rounded-lg bg-white/10 border border-white/15 text-[#FAFAF8] placeholder-[#FAFAF8]/30 text-sm focus:outline-none focus:border-[#00C9A7] focus:ring-1 focus:ring-[#00C9A7]/50 transition";
+
+  const selectClass =
+    "w-full px-4 py-3 rounded-lg bg-white/10 border border-white/15 text-sm focus:outline-none focus:border-[#00C9A7] focus:ring-1 focus:ring-[#00C9A7]/50 transition appearance-none cursor-pointer";
 
   return (
     <section
@@ -125,16 +142,20 @@ export default function Contact() {
 
         {/* Divider */}
         <FadeUp delay={0.3}>
-          <div className="flex items-center gap-4 my-12">
-            <div className="flex-1 h-px bg-white/10" />
-            <span className="text-[#FAFAF8]/30 text-xs font-medium tracking-widest uppercase">
-              Or send us a message
-            </span>
-            <div className="flex-1 h-px bg-white/10" />
+          <div className="my-14">
+            <div className="h-px bg-white/10 mb-10" />
+            <h3 className="text-xl sm:text-2xl font-bold text-[#FAFAF8] mb-2">
+              Not ready for a call? Request a quick recommendation.
+            </h3>
+            <p className="text-[#FAFAF8]/50 text-sm sm:text-base max-w-md mx-auto">
+              Tell us your biggest operational headache and we&apos;ll send a
+              personalized automation recommendation within 24 hours —
+              completely free.
+            </p>
           </div>
         </FadeUp>
 
-        {/* Fallback email form */}
+        {/* Form */}
         <FadeUp delay={0.35}>
           {state === "success" ? (
             <div className="flex flex-col items-center gap-3 py-12 text-[#00C9A7]">
@@ -209,13 +230,54 @@ export default function Contact() {
                 />
               </div>
 
+              {/* Biggest time sink dropdown */}
+              <div>
+                <label
+                  htmlFor="timeSink"
+                  className="block text-xs font-medium text-[#FAFAF8]/50 mb-1.5"
+                >
+                  What&apos;s your biggest time sink? *
+                </label>
+                <div className="relative">
+                  <select
+                    id="timeSink"
+                    name="timeSink"
+                    required
+                    value={form.timeSink}
+                    onChange={handleChange}
+                    className={`${selectClass} ${
+                      form.timeSink ? "text-[#FAFAF8]" : "text-[#FAFAF8]/30"
+                    }`}
+                  >
+                    <option value="" disabled className="bg-[#0F1B2D] text-[#FAFAF8]/50">
+                      Select the area eating most of your team&apos;s time…
+                    </option>
+                    {timeSinkOptions.map((opt) => (
+                      <option
+                        key={opt}
+                        value={opt}
+                        className="bg-[#0F1B2D] text-[#FAFAF8]"
+                      >
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                  {/* Dropdown arrow */}
+                  <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                    <svg className="w-4 h-4 text-[#FAFAF8]/40" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
               {/* Message */}
               <div>
                 <label
                   htmlFor="message"
                   className="block text-xs font-medium text-[#FAFAF8]/50 mb-1.5"
                 >
-                  How can we help? *
+                  Tell us more *
                 </label>
                 <textarea
                   id="message"
@@ -224,7 +286,7 @@ export default function Contact() {
                   rows={4}
                   value={form.message}
                   onChange={handleChange}
-                  placeholder="Tell us about your business and the repetitive tasks eating your team's time..."
+                  placeholder="Describe your biggest operational headache — we'll send a personalized recommendation."
                   className={`${inputClass} resize-none`}
                 />
               </div>
@@ -237,7 +299,7 @@ export default function Contact() {
                 </div>
               )}
 
-              {/* Submit — full-width on mobile, matches primary CTA style */}
+              {/* Submit */}
               <button
                 type="submit"
                 disabled={state === "submitting"}

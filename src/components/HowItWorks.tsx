@@ -119,6 +119,16 @@ export default function HowItWorks() {
                   {step.detail}
                 </p>
 
+                {/* Assessment credit badge — only on Step 01 */}
+                {i === 0 && (
+                  <div className="mt-5 flex items-center gap-2 px-3 py-2.5 rounded-lg bg-[#00C9A7]/15 border border-[#00C9A7]/25">
+                    <span className="text-[#00C9A7] font-bold text-sm flex-shrink-0">✓</span>
+                    <span className="text-[#00C9A7] text-xs font-semibold leading-snug">
+                      Credited in full toward any implementation project
+                    </span>
+                  </div>
+                )}
+
                 {/* Connector arrow — only between steps on desktop */}
                 {i < steps.length - 1 && (
                   <div

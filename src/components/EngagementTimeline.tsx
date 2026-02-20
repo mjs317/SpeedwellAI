@@ -3,8 +3,9 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ClipboardList, FileText, Wrench, TrendingUp } from "lucide-react";
+import { SITE_CONFIG } from "@/lib/config";
 
-const CALENDLY_URL = "https://calendly.com/speedwellai/discovery";
+const CALENDLY_URL = SITE_CONFIG.calendlyUrl;
 
 // ─── Scroll-triggered fade-up wrapper ────────────────────────────────────────
 

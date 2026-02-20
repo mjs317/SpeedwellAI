@@ -1,7 +1,7 @@
 // Footer — minimal, brand-consistent
-// Change 11: redundant "Book a Free Call" CTA removed (contact section above handles it)
 
 import { SpeedwellLogo } from "@/components/SpeedwellLogo";
+import { SITE_CONFIG } from "@/lib/config";
 
 const footerLinks = [
   { label: "How It Works", href: "#how-it-works" },
@@ -52,9 +52,8 @@ export default function Footer() {
           <p className="text-xs text-[#FAFAF8]/30">
             © 2026 Speedwell AI. All rights reserved.
           </p>
-          {/* TODO: Replace YOUR_LINKEDIN with your actual LinkedIn profile slug */}
           <a
-            href="https://www.linkedin.com/in/YOUR_LINKEDIN"
+            href={SITE_CONFIG.linkedInUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Speedwell AI on LinkedIn"

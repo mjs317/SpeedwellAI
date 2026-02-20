@@ -2,8 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { motion, type Variants, type Easing } from "framer-motion";
+import { SITE_CONFIG } from "@/lib/config";
 
-const CALENDLY_URL = "https://calendly.com/speedwellai/discovery";
+const CALENDLY_URL = SITE_CONFIG.calendlyUrl;
 
 // ─── Animated grid canvas background ─────────────────────────────────────────
 

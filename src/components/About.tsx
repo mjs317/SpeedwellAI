@@ -30,6 +30,13 @@ function FadeUp({
   );
 }
 
+const credentials = [
+  "Big 4 Experience",
+  "AI & Automation Specialist",
+  "Fixed-Price Projects",
+  "Direct Founder Access",
+];
+
 // ─── About Section ────────────────────────────────────────────────────────────
 
 export default function About() {
@@ -38,7 +45,7 @@ export default function About() {
       id="about"
       className="bg-[#FAFAF8] py-24 px-6 lg:px-8"
     >
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Section label */}
         <FadeUp className="text-center mb-10">
           <p className="text-[#00C9A7] text-sm font-semibold tracking-widest uppercase">
@@ -46,48 +53,60 @@ export default function About() {
           </p>
         </FadeUp>
 
-        {/* Heading */}
-        <FadeUp delay={0.1}>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#0F1B2D] leading-tight mb-6 text-center">
-            Built by someone who&apos;s been in the trenches.
-          </h2>
-        </FadeUp>
+        {/* Two-column layout: headshot left, text right */}
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-10 lg:gap-16">
 
-        {/* Bio copy — no placeholder brackets, plain body weight */}
-        <FadeUp delay={0.2}>
-          <p className="text-[#6B7280] text-base sm:text-lg leading-relaxed mb-5 text-center">
-            Speedwell AI was founded by Michael, a former Big 4 assurance
-            professional and AI specialist who spent years inside enterprise
-            organizations — helping global companies identify inefficiencies,
-            streamline operations, and implement technology at scale. He saw
-            firsthand how transformative the right automation could be, and how
-            little of that thinking ever reached small and mid-sized businesses.
-          </p>
-          <p className="text-[#6B7280] text-base sm:text-lg leading-relaxed text-center">
-            We exist to close that gap — with practical tools, real
-            implementations, and zero fluff. No enterprise jargon, no
-            six-figure retainers, no consultants who disappear after the
-            slide deck.
-          </p>
-        </FadeUp>
-
-        {/* Trust signal pill tags */}
-        <FadeUp delay={0.3} className="mt-10 flex flex-wrap justify-center gap-3">
-          {[
-            "Fixed-price projects",
-            "No long-term lock-in",
-            "Real implementations",
-            "Human support",
-          ].map((tag) => (
-            <span
-              key={tag}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#00C9A7]/10 text-[#00C9A7] text-xs font-semibold"
+          {/* ── Left: Headshot placeholder ── */}
+          <FadeUp delay={0.1} className="flex-shrink-0">
+            {/* Replace with actual headshot: <img src="/headshot.jpg" ... /> */}
+            <div
+              className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-[#0F1B2D] border-4 border-[#00C9A7]/30 flex items-center justify-center shadow-xl shadow-black/10"
+              aria-label="Founder headshot placeholder"
             >
-              <span className="w-1 h-1 rounded-full bg-[#00C9A7]" />
-              {tag}
-            </span>
-          ))}
-        </FadeUp>
+              <span className="text-5xl font-bold text-[#00C9A7]">M</span>
+            </div>
+          </FadeUp>
+
+          {/* ── Right: Copy ── */}
+          <div className="flex-1 text-center md:text-left">
+            <FadeUp delay={0.15}>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#0F1B2D] leading-tight mb-5">
+                Built by someone who&apos;s been in the trenches.
+              </h2>
+            </FadeUp>
+
+            <FadeUp delay={0.22}>
+              <p className="text-[#6B7280] text-base sm:text-lg leading-relaxed mb-4">
+                Speedwell AI was founded by Michael, a former Big 4 assurance
+                professional with 7+ years of experience who saw firsthand how
+                transformative the right automation could be inside enterprise
+                organizations. He helped global companies identify inefficiencies,
+                streamline operations, and implement technology at scale — then
+                realized almost none of that thinking was reaching small and
+                mid-sized businesses.
+              </p>
+              <p className="text-[#6B7280] text-base sm:text-lg leading-relaxed mb-6">
+                Now an AI specialist focused exclusively on SMBs, Michael helps
+                growing businesses close the gap between enterprise-grade
+                automation and practical, affordable implementation — without the
+                fluff, jargon, or six-figure retainers.
+              </p>
+            </FadeUp>
+
+            {/* Credential badges */}
+            <FadeUp delay={0.3} className="flex flex-wrap justify-center md:justify-start gap-2.5">
+              {credentials.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#00C9A7]/10 text-[#00C9A7] text-xs font-semibold"
+                >
+                  <span className="w-1 h-1 rounded-full bg-[#00C9A7]" />
+                  {tag}
+                </span>
+              ))}
+            </FadeUp>
+          </div>
+        </div>
       </div>
     </section>
   );

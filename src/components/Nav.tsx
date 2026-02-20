@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { SpeedwellLogo } from "@/components/SpeedwellLogo";
+import { SITE_CONFIG } from "@/lib/config";
 
-const CALENDLY_URL = "https://calendly.com/speedwellai/discovery";
+const CALENDLY_URL = SITE_CONFIG.calendlyUrl;
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
@@ -14,14 +15,17 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-/** Minimal sticky nav with blur-on-scroll and mobile drawer */
+/** Minimal sticky nav with blur-on-scroll, mobile drawer, and mobile bottom CTA bar */
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Add backdrop shadow once user scrolls past 20px
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
+    const handler = () => {
+      setScrolled(window.scrollY > 20);
+      setPastHero(window.scrollY > 500); // show bottom bar after scrolling past hero
+    };
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
@@ -42,7 +46,7 @@ export default function Nav() {
         ].join(" ")}
       >
         <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
-          {/* ── Logo (Option 3 Wordmark) ── */}
+          {/* ── Logo ── */}
           <a href="#" className="flex items-center" aria-label="Speedwell AI home">
             <SpeedwellLogo variant="dark" size="1.1rem" />
           </a>
@@ -61,7 +65,7 @@ export default function Nav() {
             ))}
           </ul>
 
-          {/* ── CTA + Mobile toggle ── */}
+          {/* ── Desktop CTA + Mobile toggle ── */}
           <div className="flex items-center gap-4">
             <a
               href={CALENDLY_URL}
@@ -113,6 +117,29 @@ export default function Nav() {
               className="mt-2 inline-flex justify-center items-center px-4 py-3 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold hover:bg-[#00a88c] transition-colors"
             >
               Book a Free Call
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Mobile sticky bottom CTA bar — appears after scrolling past hero ── */}
+      <AnimatePresence>
+        {pastHero && !mobileOpen && (
+          <motion.div
+            key="mobile-bottom-bar"
+            initial={{ y: 80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 80, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0F1B2D]/95 backdrop-blur-md border-t border-white/10 px-4 py-3 safe-area-inset-bottom"
+          >
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-full px-6 py-3.5 rounded-xl bg-[#00C9A7] text-[#0F1B2D] text-sm font-bold hover:bg-[#00a88c] transition-colors duration-200 shadow-lg shadow-[#00C9A7]/20"
+            >
+              Book a Free Call — 30 min, no commitment
             </a>
           </motion.div>
         )}

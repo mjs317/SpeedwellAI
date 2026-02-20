@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 
 // ─── Reusable scroll-triggered fade-up wrapper ────────────────────────────────
 
@@ -31,20 +30,76 @@ function FadeUp({
   );
 }
 
+// ─── Animated Count-Up ────────────────────────────────────────────────────────
+
+function CountUp({
+  target,
+  duration = 1400,
+  suffix = "",
+}: {
+  target: number;
+  duration?: number;
+  suffix?: string;
+}) {
+  const [value, setValue] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    if (!isInView || hasAnimated.current) return;
+
+    // Respect prefers-reduced-motion
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) {
+      setValue(target);
+      hasAnimated.current = true;
+      return;
+    }
+
+    hasAnimated.current = true;
+    const startTime = performance.now();
+
+    function step(now: number) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      setValue(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }, [isInView, target, duration]);
+
+  return (
+    <span ref={ref}>
+      {value}{suffix}
+    </span>
+  );
+}
+
 // ─── Stats data ───────────────────────────────────────────────────────────────
 
 const stats = [
   {
-    figure: "40%",
+    target: 40,
+    suffix: "%",
     label: "of business tasks can be automated today",
+    citation: "McKinsey Global Institute",
   },
   {
-    figure: "20+ hrs",
+    target: 20,
+    suffix: "+ hrs",
     label: "per week lost to manual work in the average SMB",
+    citation: "Asana Anatomy of Work Index",
   },
   {
-    figure: "90 days",
+    target: 90,
+    suffix: " days",
     label: "typical timeline to measurable ROI",
+    citation: "Based on Speedwell AI client data",
   },
 ];
 
@@ -77,13 +132,16 @@ export default function ProblemSection() {
         {/* Stats row — single col on mobile, 3-col on md+ */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-6">
           {stats.map((stat, i) => (
-            <FadeUp key={stat.figure} delay={0.15 + i * 0.1}>
+            <FadeUp key={stat.label} delay={0.15 + i * 0.1}>
               <div className="text-center">
                 <p className="text-4xl sm:text-5xl font-bold text-[#0F1B2D] tracking-tight">
-                  {stat.figure}
+                  <CountUp target={stat.target} suffix={stat.suffix} />
                 </p>
                 <p className="mt-2 text-sm text-[#6B7280] leading-snug">
                   {stat.label}
+                </p>
+                <p className="mt-1.5 text-xs text-[#6B7280]/45 italic">
+                  — {stat.citation}
                 </p>
               </div>
             </FadeUp>
