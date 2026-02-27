@@ -64,6 +64,11 @@ const faqs = [
     answer:
       "That's exactly what the optimization retainer is for. We monitor, maintain, and improve your automations as your business evolves. For one-off fixes outside the retainer, we offer transparent hourly support.",
   },
+  {
+    question: "Do you build custom applications, or just configure existing tools?",
+    answer:
+      "Both. Most clients start with workflow automation on platforms like Make, Zapier, or HubSpot — and that's often all they need. But when off-the-shelf tools genuinely can't do the job, we build custom: AI agents, internal dashboards, bespoke integrations, purpose-built applications. The process is the same either way — everything is scoped upfront and delivered at a fixed price. You'll never be handed an open-ended invoice because we chose to write custom code.",
+  },
 ];
 
 // ─── Individual accordion item ────────────────────────────────────────────────

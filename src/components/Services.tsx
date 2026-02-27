@@ -55,7 +55,7 @@ const services = [
     icon: Cpu,
     title: "Custom AI Applications",
     description:
-      "When off-the-shelf platforms don't fit, we build from scratch — bespoke AI agents, internal tools, and custom workflows coded to exactly how your business operates.",
+      "When off-the-shelf platforms don't fit, we build from scratch — bespoke AI agents, internal tools, and custom workflows coded to exactly how your business operates. Scoped and fixed-price like every other project we take on.",
   },
 ];
 
