@@ -9,6 +9,7 @@ import {
   Calendar,
   BarChart2,
   GitMerge,
+  Cpu,
 } from "lucide-react";
 
 // ─── Service card data ────────────────────────────────────────────────────────
@@ -49,6 +50,12 @@ const services = [
     title: "Customer Onboarding Workflows",
     description:
       "Turn a multi-day onboarding process into a seamless, consistent experience that runs itself.",
+  },
+  {
+    icon: Cpu,
+    title: "Custom AI Applications",
+    description:
+      "When off-the-shelf platforms don't fit, we build from scratch — bespoke AI agents, internal tools, and custom workflows coded to exactly how your business operates.",
   },
 ];
 
