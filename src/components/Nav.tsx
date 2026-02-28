@@ -46,10 +46,10 @@ export default function Nav() {
             : "bg-transparent",
         ].join(" ")}
       >
-        <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+        <nav className="max-w-6xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* ── Logo ── */}
           <a href="#" className="flex items-center" aria-label="Speedwell AI home">
-            <SpeedwellLogo variant="dark" size="1.1rem" />
+            <SpeedwellLogo variant="dark" size="2rem" />
           </a>
 
           {/* ── Desktop links ── */}
