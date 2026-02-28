@@ -2,8 +2,7 @@
 // Update values here; they propagate automatically across all components.
 
 export const SITE_CONFIG = {
-  // TODO: Update calendlyUrl with your confirmed Calendly link before launch
-  calendlyUrl: "https://calendly.com/speedwellai/discovery",
+  calendlyUrl: "https://calendly.com/speedwellai/30min",
   // TODO: Update linkedInUrl with your actual LinkedIn profile slug
   linkedInUrl: "https://www.linkedin.com/in/YOUR_LINKEDIN",
   email: "michael@speedwell-ai.com",
