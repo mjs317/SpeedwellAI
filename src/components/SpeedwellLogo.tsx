@@ -47,7 +47,7 @@ export function SpeedwellLogo({
         letterSpacing="-0.025em"
       >
         <tspan fill={primaryColor}>Speedwell</tspan>
-        <tspan fill="#00C9A7" fontSize={22} letterSpacing="0.06em">
+        <tspan fill="#00C9A7" fontSize={28} letterSpacing="0.06em">
           .AI
         </tspan>
       </text>
