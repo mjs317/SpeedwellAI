@@ -90,16 +90,16 @@ const stats = [
     citation: "McKinsey Global Institute",
   },
   {
-    target: 20,
-    suffix: "+ hrs",
-    label: "per week lost to manual work in the average SMB",
-    citation: "Asana Anatomy of Work Index",
+    target: 6,
+    suffix: " wks",
+    label: "average project delivery, from kickoff to deployment",
+    citation: "Speedwell AI average",
   },
   {
-    target: 90,
-    suffix: " days",
-    label: "typical timeline to measurable ROI",
-    citation: "Based on Speedwell AI client data",
+    target: 40,
+    suffix: "+",
+    label: "automations built and deployed for growing businesses",
+    citation: "Speedwell AI",
   },
 ];
 

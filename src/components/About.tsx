@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { User } from "lucide-react";
 
 // ─── Scroll-triggered fade-up wrapper ────────────────────────────────────────
 
@@ -58,12 +59,17 @@ export default function About() {
 
           {/* ── Left: Headshot placeholder ── */}
           <FadeUp delay={0.1} className="flex-shrink-0">
-            {/* Replace with actual headshot: <img src="/headshot.jpg" ... /> */}
+            {/*
+              Headshot placeholder — replace the inner content with an <img> tag:
+              <img src="/headshot.jpg" alt="Michael, founder of Speedwell AI"
+                   className="w-full h-full object-cover rounded-full" />
+            */}
             <div
-              className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-[#0F1B2D] border-4 border-[#00C9A7]/30 flex items-center justify-center shadow-xl shadow-black/10"
+              id="founder-headshot"
+              className="w-40 h-40 md:w-44 md:h-44 rounded-full bg-[#0F1B2D] border-4 border-[#00C9A7]/30 flex items-center justify-center shadow-xl shadow-black/10"
               aria-label="Founder headshot placeholder"
             >
-              <span className="text-5xl font-bold text-[#00C9A7]">M</span>
+              <User size={56} className="text-[#00C9A7]/50" strokeWidth={1.2} aria-hidden="true" />
             </div>
           </FadeUp>
 
@@ -76,20 +82,15 @@ export default function About() {
             </FadeUp>
 
             <FadeUp delay={0.22}>
-              <p className="text-[#6B7280] text-base sm:text-lg leading-relaxed mb-4">
-                Speedwell AI was founded by Michael, a former Big 4 assurance
-                professional with 7+ years of experience who saw firsthand how
-                transformative the right automation could be inside enterprise
-                organizations. He helped global companies identify inefficiencies,
-                streamline operations, and implement technology at scale — then
-                realized almost none of that thinking was reaching small and
-                mid-sized businesses.
-              </p>
               <p className="text-[#6B7280] text-base sm:text-lg leading-relaxed mb-6">
-                Now an AI specialist focused exclusively on SMBs, Michael helps
-                growing businesses close the gap between enterprise-grade
-                automation and practical, affordable implementation — without the
-                fluff, jargon, or six-figure retainers.
+                I spent 7+ years at PwC helping large enterprises streamline
+                operations and implement technology that actually stuck — and I
+                watched that same thinking never make it to the businesses that
+                needed it most. Small and mid-sized businesses were either handed
+                tools with no implementation support, or quoted six-figure
+                retainers they couldn&apos;t justify. I started Speedwell to close
+                that gap: enterprise-grade automation strategy, founder-led
+                delivery, at a price that makes sense for a business your size.
               </p>
             </FadeUp>
 

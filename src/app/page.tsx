@@ -1,8 +1,8 @@
 // ─── Speedwell AI — Single-Page Marketing Site ───────────────────────────────
 // Section order:
 //   Nav → Hero → Problem → ToolsRow → HowItWorks → Services →
-//   EngagementTimeline → WhoWeWorkWith → ComparisonTable →
-//   Testimonials → CaseStudies → About → FAQ → ROICalculator → Contact → Footer
+//   WhoWeWorkWith → ComparisonTable → WhatWeBuild →
+//   About → FAQ → ROICalculator → Contact → Footer
 
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
@@ -10,11 +10,9 @@ import ProblemSection from "@/components/ProblemSection";
 import ToolsRow from "@/components/ToolsRow";
 import HowItWorks from "@/components/HowItWorks";
 import Services from "@/components/Services";
-import EngagementTimeline from "@/components/EngagementTimeline";
 import WhoWeWorkWith from "@/components/WhoWeWorkWith";
 import ComparisonTable from "@/components/ComparisonTable";
-import Testimonials from "@/components/Testimonials";
-import CaseStudies from "@/components/CaseStudies";
+import WhatWeBuild from "@/components/WhatWeBuild";
 import About from "@/components/About";
 import FAQ from "@/components/FAQ";
 import ROICalculator from "@/components/ROICalculator";
@@ -37,37 +35,31 @@ export default function Home() {
         {/* 3. Tools we work with */}
         <ToolsRow />
 
-        {/* 4. How It Works — 3 steps with credit badge on Assessment */}
+        {/* 4. How It Works — 3 steps with timing + credit badge on Assessment */}
         <HowItWorks />
 
-        {/* 5. Services — 6-card grid */}
+        {/* 5. Services — 7-card grid with concrete examples */}
         <Services />
 
-        {/* 6. Engagement Timeline — 4-stage journey */}
-        <EngagementTimeline />
-
-        {/* 7. Who We Work With — interactive persona tabs */}
+        {/* 6. Who We Work With — 3 always-visible persona cards */}
         <WhoWeWorkWith />
 
-        {/* 8. Why Speedwell — comparison table */}
+        {/* 7. Why Speedwell — comparison table */}
         <ComparisonTable />
 
-        {/* 9. Testimonials — 3 detailed client results */}
-        <Testimonials />
+        {/* 8. What We Build — 4 capability cards */}
+        <WhatWeBuild />
 
-        {/* 10. Case Studies — 3 outcome cards */}
-        <CaseStudies />
-
-        {/* 11. About — 2-col with headshot placeholder */}
+        {/* 9. About — founder narrative + headshot placeholder */}
         <About />
 
-        {/* 12. FAQ — accordion, first item open */}
+        {/* 10. FAQ — accordion, first item open */}
         <FAQ />
 
-        {/* 13. ROI Calculator */}
+        {/* 11. ROI Calculator */}
         <ROICalculator />
 
-        {/* 14. Contact / CTA */}
+        {/* 12. Contact / CTA */}
         <Contact />
       </main>
 

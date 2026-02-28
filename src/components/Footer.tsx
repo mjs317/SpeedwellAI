@@ -7,8 +7,8 @@ const footerLinks = [
   { label: "How It Works", href: "#how-it-works" },
   { label: "Services", href: "#services" },
   { label: "About", href: "#about" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "#contact" },
-  // TODO: Add Privacy Policy and Terms links once pages are created
 ];
 
 export default function Footer() {

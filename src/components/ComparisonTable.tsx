@@ -108,7 +108,7 @@ export default function ComparisonTable() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold hover:bg-[#00a88c] transition-colors duration-200 shadow-md shadow-[#00C9A7]/20"
           >
-            Start with a $499 Assessment →
+            Book a Free Discovery Call
           </a>
         </FadeUp>
       </div>

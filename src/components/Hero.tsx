@@ -196,27 +196,29 @@ export default function Hero() {
           we stay through implementation and make sure it actually works.
         </motion.p>
 
-        {/* CTAs — primary dominates, secondary is clearly ghost/subordinate */}
+        {/* CTAs — primary to Calendly, secondary to contact form */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={0.45}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          {/* Primary — full-width on mobile, teal filled */}
+          {/* Primary — Calendly booking */}
           <a
-            href="#contact"
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold text-base hover:bg-[#00a88c] transition-colors duration-200 shadow-lg shadow-[#00C9A7]/20"
           >
-            Book a Discovery Call
+            Book a Free Discovery Call
           </a>
-          {/* Secondary — ghost, shorter height, clearly subordinate */}
+          {/* Secondary — scrolls to contact form for a free recommendation */}
           <a
-            href="#how-it-works"
-            className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-2.5 rounded-lg border border-[#FAFAF8]/25 text-[#FAFAF8]/75 font-medium text-sm hover:border-[#FAFAF8]/50 hover:text-[#FAFAF8] hover:bg-[#FAFAF8]/5 transition-all duration-200"
+            href="#contact"
+            className="text-[#FAFAF8]/65 font-medium text-sm hover:text-[#FAFAF8] transition-colors duration-200 underline underline-offset-4 decoration-[#FAFAF8]/30 hover:decoration-[#FAFAF8]/60"
           >
-            See How It Works
+            Get a Free Recommendation
           </a>
         </motion.div>
       </div>

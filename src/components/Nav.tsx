@@ -12,6 +12,7 @@ const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
   { label: "Services", href: "#services" },
   { label: "About", href: "#about" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -73,7 +74,7 @@ export default function Nav() {
               rel="noopener noreferrer"
               className="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-[#00C9A7] text-[#0F1B2D] text-sm font-semibold hover:bg-[#00a88c] transition-colors duration-200"
             >
-              Book a Discovery Call
+              Book a Free Discovery Call
             </a>
 
             {/* Mobile hamburger */}
@@ -116,7 +117,7 @@ export default function Nav() {
               onClick={closeMobile}
               className="mt-2 inline-flex justify-center items-center px-4 py-3 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold hover:bg-[#00a88c] transition-colors"
             >
-              Book a Discovery Call
+              Book a Free Discovery Call
             </a>
           </motion.div>
         )}

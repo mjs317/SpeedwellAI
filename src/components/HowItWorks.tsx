@@ -2,6 +2,9 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { SITE_CONFIG } from "@/lib/config";
+
+const CALENDLY_URL = SITE_CONFIG.calendlyUrl;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -11,6 +14,7 @@ interface Step {
   price: string;
   description: string;
   detail: string;
+  timing: string;
 }
 
 // ─── Step data ────────────────────────────────────────────────────────────────
@@ -23,6 +27,7 @@ const steps: Step[] = [
     description: "Understand your operations.",
     detail:
       "We audit your operations, workflows, and tools. You get a prioritized roadmap of automation opportunities — credited toward your project if you move forward. And if we're not the right fit, you'll still walk away with a clear picture of your automation opportunities.",
+    timing: "Week 1–2",
   },
   {
     number: "02",
@@ -31,6 +36,7 @@ const steps: Step[] = [
     description: "We build. You grow.",
     detail:
       "We build and deploy the automations. Fixed-price, scoped from your assessment. No scope creep, no surprise invoices — just working software.",
+    timing: "Week 3–8",
   },
   {
     number: "03",
@@ -39,6 +45,7 @@ const steps: Step[] = [
     description: "Stay ahead, continuously.",
     detail:
       "Ongoing support, new builds, staff training, and quarterly reviews. Your automations improve as your business grows.",
+    timing: "Ongoing",
   },
 ];
 
@@ -96,10 +103,15 @@ export default function HowItWorks() {
           {steps.map((step, i) => (
             <FadeUp key={step.number} delay={0.1 + i * 0.12}>
               <div className="relative h-full flex flex-col p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#00C9A7]/40 transition-colors duration-300 group">
-                {/* Step number */}
-                <span className="text-5xl font-bold text-[#00C9A7]/20 group-hover:text-[#00C9A7]/40 transition-colors font-mono leading-none mb-6 select-none">
-                  {step.number}
-                </span>
+                {/* Step number + timing */}
+                <div className="flex items-start justify-between mb-6">
+                  <span className="text-5xl font-bold text-[#00C9A7]/20 group-hover:text-[#00C9A7]/40 transition-colors font-mono leading-none select-none">
+                    {step.number}
+                  </span>
+                  <span className="text-xs font-semibold text-[#00C9A7]/60 tracking-wide uppercase mt-1">
+                    {step.timing}
+                  </span>
+                </div>
 
                 {/* Title + price */}
                 <div className="mb-4">
@@ -154,10 +166,12 @@ export default function HowItWorks() {
         {/* Bottom CTA */}
         <FadeUp delay={0.5} className="text-center mt-12">
           <a
-            href="#contact"
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center px-8 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold hover:bg-[#00a88c] transition-colors duration-200"
           >
-            Start with an Assessment
+            Book a Free Discovery Call
           </a>
         </FadeUp>
       </div>
