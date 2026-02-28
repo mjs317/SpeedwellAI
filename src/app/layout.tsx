@@ -57,9 +57,8 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true },
   },
   icons: {
-    // SVG favicon (velocity chevron mark) — see /public/favicon.svg
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", type: "image/png" },
       { url: "/favicon.ico" }, // fallback for older browsers
     ],
   },
