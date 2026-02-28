@@ -50,8 +50,8 @@ export default function ROICalculator() {
   const monthlySavings = monthlyCost * 0.4;
   const annualSavings = monthlySavings * 12;
   const roiPercent =
-    annualSavings > 10000
-      ? Math.round(((annualSavings - 10000) / 10000) * 100)
+    annualSavings > 2500
+      ? Math.round(((annualSavings - 2500) / 2500) * 100)
       : 0;
 
   const sliderClass =
@@ -195,7 +195,7 @@ export default function ROICalculator() {
                 {/* ROI callout */}
                 <div className="p-5 rounded-xl bg-[#00C9A7] text-[#0F1B2D]">
                   <p className="text-xs font-semibold uppercase tracking-wider mb-1 opacity-70">
-                    Est. ROI on a $10k project
+                    Est. ROI on a $2.5k project
                   </p>
                   <p className="text-3xl font-bold">
                     {roiPercent > 0 ? `${roiPercent}%` : "< breakeven"}
