@@ -209,7 +209,7 @@ export default function Hero() {
             href="#contact"
             className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold text-base hover:bg-[#00a88c] transition-colors duration-200 shadow-lg shadow-[#00C9A7]/20"
           >
-            Get Your AI Assessment
+            Book a Discovery Call
           </a>
           {/* Secondary — ghost, shorter height, clearly subordinate */}
           <a

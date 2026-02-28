@@ -73,7 +73,7 @@ export default function Nav() {
               rel="noopener noreferrer"
               className="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-[#00C9A7] text-[#0F1B2D] text-sm font-semibold hover:bg-[#00a88c] transition-colors duration-200"
             >
-              Book a Free Call
+              Book a Discovery Call
             </a>
 
             {/* Mobile hamburger */}
@@ -116,7 +116,7 @@ export default function Nav() {
               onClick={closeMobile}
               className="mt-2 inline-flex justify-center items-center px-4 py-3 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold hover:bg-[#00a88c] transition-colors"
             >
-              Book a Free Call
+              Book a Discovery Call
             </a>
           </motion.div>
         )}
@@ -139,7 +139,7 @@ export default function Nav() {
               rel="noopener noreferrer"
               className="flex items-center justify-center w-full px-6 py-3.5 rounded-xl bg-[#00C9A7] text-[#0F1B2D] text-sm font-bold hover:bg-[#00a88c] transition-colors duration-200 shadow-lg shadow-[#00C9A7]/20"
             >
-              Book a Free Call — 30 min, no commitment
+              Book a Free Discovery Call — 30 min
             </a>
           </motion.div>
         )}

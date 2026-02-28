@@ -45,9 +45,9 @@ const faqs = [
       "Zapier and ChatGPT are tools — and great ones. But most businesses don't have the time or expertise to figure out which automations to build, how to connect them securely, or how to maintain them over time. We handle the strategy, the build, and the ongoing optimization so you can focus on running your business.",
   },
   {
-    question: "What does the $997 assessment include?",
+    question: "What does the $499 assessment include?",
     answer:
-      "A thorough audit of your operations, workflows, and existing tools. You'll receive a prioritized roadmap of automation opportunities with estimated time savings and effort to implement. If you move forward with implementation, the $997 is credited toward your project.",
+      "A thorough audit of your operations, workflows, and existing tools. You'll receive a prioritized roadmap of automation opportunities with estimated time savings and effort to implement. If you move forward with implementation, the $499 is credited toward your project.",
   },
   {
     question: "Do I need to be technical to work with you?",

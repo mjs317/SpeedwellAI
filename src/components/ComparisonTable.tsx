@@ -34,7 +34,7 @@ function FadeUp({
 // ─── Comparison data ──────────────────────────────────────────────────────────
 
 const rows = [
-  { label: "Starting investment", big: "$50,000+", diy: "$0 – $2,000", speedwell: "$997" },
+  { label: "Starting investment", big: "$50,000+", diy: "$0 – $2,000", speedwell: "$499" },
   { label: "Time to ROI", big: "6 – 12 months", diy: "Uncertain", speedwell: "~90 days" },
   { label: "Who does the work", big: "Junior consultants", diy: "You (or a contractor)", speedwell: "Founder-led delivery" },
   { label: "Ongoing support", big: "Expensive retainer", diy: "None", speedwell: "Affordable monthly plans" },
@@ -108,7 +108,7 @@ export default function ComparisonTable() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold hover:bg-[#00a88c] transition-colors duration-200 shadow-md shadow-[#00C9A7]/20"
           >
-            Start with a $997 Assessment →
+            Start with a $499 Assessment →
           </a>
         </FadeUp>
       </div>

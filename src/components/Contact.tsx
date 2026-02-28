@@ -123,8 +123,9 @@ export default function Contact() {
 
         <FadeUp delay={0.1}>
           <p className="text-[#FAFAF8]/60 text-base sm:text-lg max-w-xl mx-auto mb-10">
-            Book a free 30-minute discovery call. No pitch, no pressure — just a
-            real conversation about where automation can help.
+            Book a free 30-minute discovery call. We&apos;ll talk through your
+            operations and decide together whether the $499 Assessment is the
+            right next step.
           </p>
         </FadeUp>
 
@@ -136,7 +137,7 @@ export default function Contact() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-10 py-4 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-bold text-base hover:bg-[#00a88c] transition-colors duration-200 shadow-lg shadow-[#00C9A7]/20"
           >
-            Book Your Free Call
+            Book Your Discovery Call
           </a>
         </FadeUp>
 

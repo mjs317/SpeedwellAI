@@ -12,4 +12,5 @@ export const SITE_CONFIG = {
   siteDescription:
     "AI automation consultancy helping small and mid-sized businesses identify, implement, and optimize AI automations — without the enterprise price tag.",
   founderName: "Michael",
+  assessmentPrice: "$499",
 } as const;

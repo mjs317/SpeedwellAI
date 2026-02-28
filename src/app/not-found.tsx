@@ -41,7 +41,7 @@ export default function NotFound() {
             rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 rounded-lg border border-white/20 text-[#FAFAF8] font-semibold text-sm hover:border-[#00C9A7]/50 hover:text-[#00C9A7] transition-colors duration-200"
           >
-            Book a Free Call
+            Book a Discovery Call
           </a>
         </div>
 

@@ -78,7 +78,7 @@ const jsonLd = {
       founder: { "@type": "Person", name: SITE_CONFIG.founderName },
       serviceType: "AI Automation Consulting",
       areaServed: "United States",
-      priceRange: "$997 – $20,000",
+      priceRange: "$499 – $20,000",
       contactPoint: {
         "@type": "ContactPoint",
         email: SITE_CONFIG.email,
@@ -98,10 +98,10 @@ const jsonLd = {
         },
         {
           "@type": "Question",
-          name: "What does the $997 assessment include?",
+          name: "What does the $499 assessment include?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "A thorough audit of your operations, workflows, and existing tools. You'll receive a prioritized roadmap of automation opportunities. The $997 is credited toward your project if you move forward.",
+            text: "A thorough audit of your operations, workflows, and existing tools. You'll receive a prioritized roadmap of automation opportunities. The $499 is credited toward your project if you move forward.",
           },
         },
         {

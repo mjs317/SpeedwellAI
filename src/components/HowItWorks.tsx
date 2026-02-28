@@ -19,10 +19,10 @@ const steps: Step[] = [
   {
     number: "01",
     title: "Assessment",
-    price: "$997",
+    price: "$499",
     description: "Understand your operations.",
     detail:
-      "We audit your operations, workflows, and tools. You get a prioritized roadmap of automation opportunities — credited toward your project if you move forward.",
+      "We audit your operations, workflows, and tools. You get a prioritized roadmap of automation opportunities — credited toward your project if you move forward. And if we're not the right fit, you'll still walk away with a clear picture of your automation opportunities.",
   },
   {
     number: "02",
