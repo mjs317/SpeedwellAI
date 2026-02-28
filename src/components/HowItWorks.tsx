@@ -144,7 +144,7 @@ export default function HowItWorks() {
                 {/* Connector arrow — only between steps on desktop */}
                 {i < steps.length - 1 && (
                   <div
-                    className="hidden lg:block absolute -right-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full border border-white/20 bg-[#0F1B2D] flex items-center justify-center z-10"
+                    className="hidden lg:flex absolute -right-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full border border-white/20 bg-[#0F1B2D] items-center justify-center z-10"
                     aria-hidden="true"
                   >
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
