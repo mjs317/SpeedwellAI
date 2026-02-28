@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 52" role="img" aria-label="Speedwell AI">
+  <title>Speedwell AI</title>
+  <text
+    y="40"
+    font-family="'Geist', 'Inter', -apple-system, 'Helvetica Neue', sans-serif"
+    font-weight="800"
+    font-size="36"
+    letter-spacing="-0.025em"
+  >
+    <tspan fill="#FAFAF8">Speedwell</tspan><tspan fill="#00C9A7" font-size="22" letter-spacing="0.06em">.AI</tspan>
+  </text>
+</svg>
