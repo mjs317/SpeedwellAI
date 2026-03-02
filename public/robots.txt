@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://speedwell-ai.vercel.app/sitemap.xml
+Sitemap: https://speedwellai.com/sitemap.xml

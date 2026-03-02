@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { SITE_CONFIG } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Blog — Speedwell AI",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
     description:
       "Practical guides on AI automation for small and mid-sized businesses.",
     type: "website",
-    url: "https://speedwell-ai.vercel.app/blog",
+    url: `${SITE_CONFIG.siteUrl}/blog`,
   },
 };
 

@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { SpeedwellLogo } from "@/components/SpeedwellLogo";
@@ -9,11 +11,11 @@ import { SITE_CONFIG } from "@/lib/config";
 const CALENDLY_URL = SITE_CONFIG.calendlyUrl;
 
 const navLinks = [
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/#about" },
   { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 /** Minimal sticky nav with blur-on-scroll, mobile drawer, and mobile bottom CTA bar */
@@ -21,6 +23,8 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomepage = pathname === "/";
 
   useEffect(() => {
     const handler = () => {
@@ -41,16 +45,16 @@ export default function Nav() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className={[
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          scrolled
+          scrolled || !isHomepage
             ? "bg-[#0F1B2D]/95 backdrop-blur-md shadow-lg shadow-black/20"
             : "bg-transparent",
         ].join(" ")}
       >
         <nav className="max-w-6xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* ── Logo ── */}
-          <a href="#" className="flex items-center" aria-label="Speedwell AI home">
+          <Link href="/" className="flex items-center" aria-label="Speedwell AI home">
             <SpeedwellLogo variant="dark" size="2rem" />
-          </a>
+          </Link>
 
           {/* ── Desktop links ── */}
           <ul className="hidden md:flex items-center gap-8">
