@@ -97,6 +97,14 @@ const jsonLd = {
         },
         {
           "@type": "Question",
+          name: "Can't I just use ChatGPT?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "ChatGPT is great for one-off tasks — writing emails, brainstorming ideas, answering questions. But it can't log into your CRM, auto-qualify your leads, trigger follow-up sequences, or push invoice data into QuickBooks. That requires understanding your specific tools, data, and workflows — then building connectors, guardrails, and human-review steps that work in production. We build the systems. ChatGPT is one of many tools we use inside them.",
+          },
+        },
+        {
+          "@type": "Question",
           name: "What does the $499 assessment include?",
           acceptedAnswer: {
             "@type": "Answer",

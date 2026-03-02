@@ -53,6 +53,26 @@ export default function About() {
           </p>
         </FadeUp>
 
+        {/* Founder photo */}
+        <FadeUp delay={0.05} className="mb-6">
+          <div className="inline-block">
+            <div className="w-24 h-24 rounded-full bg-[#0F1B2D]/10 overflow-hidden mx-auto ring-2 ring-[#00C9A7]/30">
+              {/* Replace /michael-solimini.jpg with your actual photo */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/michael-solimini.jpg"
+                alt="Michael Solimini, Founder of Speedwell AI"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = "none";
+                }}
+              />
+            </div>
+            <p className="mt-3 text-sm font-semibold text-[#0F1B2D]">Michael Solimini</p>
+            <p className="text-xs text-[#6B7280]">Founder, Speedwell AI</p>
+          </div>
+        </FadeUp>
+
         <FadeUp delay={0.1}>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#0F1B2D] leading-tight mb-5">
             Built by people who&apos;ve been on both sides of the table.

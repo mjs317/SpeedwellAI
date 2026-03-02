@@ -1,5 +1,6 @@
 // ─── Custom 404 Page ──────────────────────────────────────────────────────────
 
+import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/config";
 import type { Metadata } from "next";
 
@@ -29,12 +30,12 @@ export default function NotFound() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
+          <Link
             href="/"
             className="inline-flex items-center px-6 py-3 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold text-sm hover:bg-[#00a88c] transition-colors duration-200"
           >
             Back to homepage
-          </a>
+          </Link>
           <a
             href={SITE_CONFIG.calendlyUrl}
             target="_blank"
@@ -47,7 +48,7 @@ export default function NotFound() {
 
         {/* Brand mark */}
         <p className="mt-12 text-xs text-[#FAFAF8]/20">
-          {SITE_CONFIG.siteName} · {SITE_CONFIG.siteUrl}
+          {SITE_CONFIG.siteName}
         </p>
       </div>
     </div>
