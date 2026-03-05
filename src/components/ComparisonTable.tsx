@@ -48,7 +48,7 @@ export default function ComparisonTable() {
   return (
     <section
       id="why-speedwell"
-      className="bg-[#FAFAF8] py-24 px-4 lg:px-8"
+      className="bg-[#FAFAF8] py-16 px-4 lg:px-8"
     >
       <div className="max-w-5xl mx-auto">
         {/* Header */}

@@ -213,12 +213,12 @@ export default function Hero() {
           >
             Book a Free Discovery Call
           </a>
-          {/* Secondary — scrolls to contact form for a free recommendation */}
+          {/* Secondary — scrolls to lead magnet / free guide */}
           <a
-            href="#contact"
+            href="#lead-magnet"
             className="text-[#FAFAF8]/65 font-medium text-sm hover:text-[#FAFAF8] transition-colors duration-200 underline underline-offset-4 decoration-[#FAFAF8]/30 hover:decoration-[#FAFAF8]/60"
           >
-            Get a Free Recommendation
+            Download Free Guide →
           </a>
         </motion.div>
       </div>

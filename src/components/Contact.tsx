@@ -111,7 +111,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="bg-[#0F1B2D] py-24 px-6 lg:px-8"
+      className="bg-[#0F1B2D] py-20 px-6 lg:px-8"
     >
       <div className="max-w-3xl mx-auto text-center">
         {/* Headline */}
@@ -137,7 +137,7 @@ export default function Contact() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-10 py-4 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-bold text-base hover:bg-[#00a88c] transition-colors duration-200 shadow-lg shadow-[#00C9A7]/20"
           >
-            Book Your Discovery Call
+            Book a Free Discovery Call
           </a>
         </FadeUp>
 

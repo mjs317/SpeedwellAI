@@ -1,20 +1,21 @@
 // ─── Speedwell AI — Single-Page Marketing Site ───────────────────────────────
 // Section order:
-//   Nav → Hero → Problem → ToolsRow → HowItWorks → Services →
-//   WhoWeWorkWith → ComparisonTable → WhatWeBuild →
-//   About → FAQ → ROICalculator → Contact → Footer
+//   Nav → Hero → Problem → ToolsRow → HowItWorks → WhatWeBuild (merged services) →
+//   WhoWeWorkWith → Results → ComparisonTable →
+//   About → FAQ → LeadMagnet → ROICalculator → Contact → Footer
 
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import ProblemSection from "@/components/ProblemSection";
 import ToolsRow from "@/components/ToolsRow";
 import HowItWorks from "@/components/HowItWorks";
-import Services from "@/components/Services";
-import WhoWeWorkWith from "@/components/WhoWeWorkWith";
-import ComparisonTable from "@/components/ComparisonTable";
 import WhatWeBuild from "@/components/WhatWeBuild";
+import WhoWeWorkWith from "@/components/WhoWeWorkWith";
+import Results from "@/components/Results";
+import ComparisonTable from "@/components/ComparisonTable";
 import About from "@/components/About";
 import FAQ from "@/components/FAQ";
+import LeadMagnet from "@/components/LeadMagnet";
 import ROICalculator from "@/components/ROICalculator";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -38,17 +39,17 @@ export default function Home() {
         {/* 4. How It Works — 3 steps with timing + credit badge on Assessment */}
         <HowItWorks />
 
-        {/* 5. Services — 7-card grid with concrete examples */}
-        <Services />
+        {/* 5. What We Build — merged services section (detailed cards with build times) */}
+        <WhatWeBuild />
 
         {/* 6. Who We Work With — 3 always-visible persona cards */}
         <WhoWeWorkWith />
 
-        {/* 7. Why Speedwell — comparison table */}
-        <ComparisonTable />
+        {/* 7. Results — placeholder case study / social proof */}
+        <Results />
 
-        {/* 8. What We Build — 4 capability cards */}
-        <WhatWeBuild />
+        {/* 8. Why Speedwell — comparison table */}
+        <ComparisonTable />
 
         {/* 9. About — founder narrative + headshot placeholder */}
         <About />
@@ -56,10 +57,13 @@ export default function Home() {
         {/* 10. FAQ — accordion, first item open */}
         <FAQ />
 
-        {/* 11. ROI Calculator */}
+        {/* 11. Lead Magnet / Email Capture */}
+        <LeadMagnet />
+
+        {/* 12. ROI Calculator */}
         <ROICalculator />
 
-        {/* 12. Contact / CTA */}
+        {/* 13. Contact / Final CTA */}
         <Contact />
       </main>
 
