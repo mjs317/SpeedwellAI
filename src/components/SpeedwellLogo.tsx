@@ -28,7 +28,7 @@ export function SpeedwellLogo({
 
   return (
     <svg
-      viewBox="0 0 310 52"
+      viewBox="0 0 340 52"
       style={{
         height: size,
         width: "auto",
@@ -47,7 +47,7 @@ export function SpeedwellLogo({
         letterSpacing="-0.025em"
       >
         <tspan fill={primaryColor}>Speedwell</tspan>
-        <tspan fill="#00C9A7" fontSize={28} letterSpacing="0.06em">
+        <tspan fill="#00C9A7" fontSize={36} letterSpacing="0.06em">
           .AI
         </tspan>
       </text>
