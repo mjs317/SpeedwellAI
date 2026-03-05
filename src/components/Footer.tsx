@@ -19,7 +19,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 mb-8">
           {/* Logo — Option 3 Wordmark */}
           <a href="#" className="flex items-center" aria-label="Speedwell AI home">
-            <SpeedwellLogo variant="dark" size="1rem" />
+            <SpeedwellLogo variant="dark" size="2rem" />
           </a>
 
           {/* Nav links */}
