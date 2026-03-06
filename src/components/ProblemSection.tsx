@@ -91,17 +91,17 @@ const stats = [
     citation: "McKinsey Global Institute",
   },
   {
+    target: 10,
+    suffix: " hrs/wk",
+    staticValue: null,
+    label: "average time SMB employees spend on tasks AI can handle",
+    citation: "industry average",
+  },
+  {
     target: 3,
     suffix: " wks",
     staticValue: null,
     label: "typical time from kickoff to first automation live",
-    citation: "Speedwell AI target",
-  },
-  {
-    target: null,
-    suffix: "",
-    staticValue: "$499",
-    label: "to get started — includes a full automation roadmap",
     citation: "Speedwell AI",
   },
 ];
