@@ -35,7 +35,7 @@ export default function Footer() {
           {/* Column 1 — Brand */}
           <div className="flex flex-col gap-3">
             <a href="#" className="flex items-center" aria-label="Speedwell AI home">
-              <SpeedwellLogo variant="dark" size="1rem" />
+              <SpeedwellLogo variant="dark" size="1.5rem" />
             </a>
             <p className="text-xs text-[#FAFAF8]/35 leading-relaxed max-w-[220px]">
               AI automation for small and mid-sized businesses.
