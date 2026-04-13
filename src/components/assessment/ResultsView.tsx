@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, Calendar, CheckCircle2 } from "lucide-react";
@@ -67,6 +68,15 @@ export default function ResultsView({
 }: ResultsViewProps) {
   const topRec = recommendations[0];
   const color = tierColor(tier);
+
+  // Permanently suppress the site-wide assessment popup for this visitor.
+  useEffect(() => {
+    try {
+      window.localStorage.setItem("sw_assessment_completed", "1");
+    } catch {
+      /* localStorage unavailable — fine, popup will still suppress on dismiss */
+    }
+  }, []);
 
   return (
     <motion.div
