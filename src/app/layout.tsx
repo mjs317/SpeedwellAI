@@ -4,6 +4,7 @@ import Script from "next/script";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import Analytics from "@/components/Analytics";
+import AssessmentPopup from "@/components/AssessmentPopup";
 import { SITE_CONFIG } from "@/lib/config";
 import "./globals.css";
 
@@ -152,6 +153,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         {children}
+        <AssessmentPopup />
         <Analytics />
       </body>
     </html>
