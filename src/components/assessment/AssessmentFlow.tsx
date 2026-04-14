@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import ProgressBar from "./ProgressBar";
@@ -48,6 +49,7 @@ interface ApiResult {
 const TOTAL_STEPS = SCORED_QUESTIONS.length + 1 + 1;
 
 export default function AssessmentFlow() {
+  const router = useRouter();
   const [step, setStep] = useState<StepKind>({ kind: "scored", index: 0 });
   const [contact, setContact] = useState<ContactInfo>({
     name: "",
@@ -111,7 +113,11 @@ export default function AssessmentFlow() {
   function goBack() {
     setError("");
     if (step.kind === "scored") {
-      if (step.index > 0) setStep({ kind: "scored", index: step.index - 1 });
+      if (step.index > 0) {
+        setStep({ kind: "scored", index: step.index - 1 });
+      } else {
+        router.push("/");
+      }
     } else if (step.kind === "pain") {
       setStep({ kind: "scored", index: SCORED_QUESTIONS.length - 1 });
     } else if (step.kind === "contact") {
@@ -269,8 +275,7 @@ export default function AssessmentFlow() {
           <button
             type="button"
             onClick={goBack}
-            disabled={step.kind === "scored" && step.index === 0}
-            className="inline-flex items-center gap-1.5 text-[#FAFAF8]/60 hover:text-[#FAFAF8] text-sm font-medium disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="inline-flex items-center gap-1.5 text-[#FAFAF8]/60 hover:text-[#FAFAF8] text-sm font-medium transition-colors"
           >
             <ArrowLeft size={14} />
             Back
