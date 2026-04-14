@@ -27,9 +27,9 @@ import type {
 type Answer = 1 | 2 | 3 | 4;
 
 type StepKind =
-  | { kind: "contact" }
   | { kind: "scored"; index: number }
   | { kind: "pain" }
+  | { kind: "contact" }
   | { kind: "loading" }
   | { kind: "results" };
 
@@ -44,11 +44,11 @@ interface ApiResult {
   recommendations: Recommendation[];
 }
 
-// 1 contact + 7 scored + 1 pain-point = 9 steps in the progress bar
-const TOTAL_STEPS = 1 + SCORED_QUESTIONS.length + 1;
+// 7 scored + 1 pain-point + 1 contact = 9 steps in the progress bar
+const TOTAL_STEPS = SCORED_QUESTIONS.length + 1 + 1;
 
 export default function AssessmentFlow() {
-  const [step, setStep] = useState<StepKind>({ kind: "contact" });
+  const [step, setStep] = useState<StepKind>({ kind: "scored", index: 0 });
   const [contact, setContact] = useState<ContactInfo>({
     name: "",
     email: "",
@@ -62,9 +62,9 @@ export default function AssessmentFlow() {
   const [apiResult, setApiResult] = useState<ApiResult | null>(null);
 
   const currentIndex = (() => {
-    if (step.kind === "contact") return 0;
-    if (step.kind === "scored") return 1 + step.index;
-    if (step.kind === "pain") return 1 + SCORED_QUESTIONS.length;
+    if (step.kind === "scored") return step.index;
+    if (step.kind === "pain") return SCORED_QUESTIONS.length;
+    if (step.kind === "contact") return SCORED_QUESTIONS.length + 1;
     return TOTAL_STEPS - 1;
   })();
 
@@ -73,18 +73,6 @@ export default function AssessmentFlow() {
 
   function validateAndNext() {
     setError("");
-    if (step.kind === "contact") {
-      if (!contact.name.trim()) return setError("Please enter your name.");
-      if (!contact.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email)) {
-        return setError("Please enter a valid email.");
-      }
-      if (!contact.company.trim()) return setError("Please enter your company.");
-      if (contact.teamSize && !TEAM_SIZE_OPTIONS.includes(contact.teamSize as TeamSize)) {
-        return setError("Invalid team size.");
-      }
-      setStep({ kind: "scored", index: 0 });
-      return;
-    }
     if (step.kind === "scored") {
       const q = SCORED_QUESTIONS[step.index];
       if (!answers[q.id as keyof Answers]) {
@@ -103,6 +91,18 @@ export default function AssessmentFlow() {
       if (painPoint === "Other" && !painPointOther.trim()) {
         return setError("Please describe your pain point.");
       }
+      setStep({ kind: "contact" });
+      return;
+    }
+    if (step.kind === "contact") {
+      if (!contact.name.trim()) return setError("Please enter your name.");
+      if (!contact.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email)) {
+        return setError("Please enter a valid email.");
+      }
+      if (!contact.company.trim()) return setError("Please enter your company.");
+      if (contact.teamSize && !TEAM_SIZE_OPTIONS.includes(contact.teamSize as TeamSize)) {
+        return setError("Invalid team size.");
+      }
       void submit();
       return;
     }
@@ -111,10 +111,11 @@ export default function AssessmentFlow() {
   function goBack() {
     setError("");
     if (step.kind === "scored") {
-      if (step.index === 0) setStep({ kind: "contact" });
-      else setStep({ kind: "scored", index: step.index - 1 });
+      if (step.index > 0) setStep({ kind: "scored", index: step.index - 1 });
     } else if (step.kind === "pain") {
       setStep({ kind: "scored", index: SCORED_QUESTIONS.length - 1 });
+    } else if (step.kind === "contact") {
+      setStep({ kind: "pain" });
     }
   }
 
@@ -145,7 +146,7 @@ export default function AssessmentFlow() {
       const message =
         err instanceof Error ? err.message : "Something went wrong.";
       setError(message);
-      setStep({ kind: "pain" });
+      setStep({ kind: "contact" });
     }
   }
 
@@ -157,7 +158,7 @@ export default function AssessmentFlow() {
           <SpeedwellLogo variant="dark" size="1.6rem" />
         </Link>
         {step.kind !== "results" && step.kind !== "loading" && (
-          <div className="text-xs text-[#FAFAF8]/50">AI Readiness Assessment</div>
+          <div className="text-xs text-[#FAFAF8]/50">AI Readiness Scorecard</div>
         )}
       </div>
 
@@ -176,14 +177,6 @@ export default function AssessmentFlow() {
             exit={{ opacity: 0, y: -14 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
-            {step.kind === "contact" && (
-              <ContactStep
-                value={contact}
-                onChange={setContact}
-                error={error}
-              />
-            )}
-
             {step.kind === "scored" &&
               (() => {
                 const q = SCORED_QUESTIONS[step.index];
@@ -210,7 +203,7 @@ export default function AssessmentFlow() {
 
             {step.kind === "pain" && (
               <QuestionStep
-                eyebrow="Last one"
+                eyebrow="Almost there"
                 prompt={PAIN_POINT_QUESTION}
                 options={PAIN_POINT_OPTIONS.map((p) => ({
                   label: p,
@@ -223,6 +216,22 @@ export default function AssessmentFlow() {
                 onOtherChange={setPainPointOther}
                 error={error}
               />
+            )}
+
+            {step.kind === "contact" && (
+              <div className="flex flex-col gap-1 mb-2">
+                <p className="text-xs font-semibold text-[#00C9A7] uppercase tracking-widest mb-2">
+                  Almost done
+                </p>
+                <p className="text-[#FAFAF8]/65 text-sm mb-4">
+                  Enter your details to get your personalized report.
+                </p>
+                <ContactStep
+                  value={contact}
+                  onChange={setContact}
+                  error={error}
+                />
+              </div>
             )}
 
             {step.kind === "loading" && (
@@ -260,7 +269,7 @@ export default function AssessmentFlow() {
           <button
             type="button"
             onClick={goBack}
-            disabled={step.kind === "contact"}
+            disabled={step.kind === "scored" && step.index === 0}
             className="inline-flex items-center gap-1.5 text-[#FAFAF8]/60 hover:text-[#FAFAF8] text-sm font-medium disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             <ArrowLeft size={14} />
@@ -271,7 +280,7 @@ export default function AssessmentFlow() {
             onClick={validateAndNext}
             className="inline-flex items-center gap-1.5 px-6 py-3 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold text-sm hover:bg-[#00a88c] transition-colors shadow-lg shadow-[#00C9A7]/20"
           >
-            {step.kind === "pain" ? "Get my report" : "Continue"}
+            {step.kind === "contact" ? "Get my report" : "Continue"}
             <ArrowRight size={15} />
           </button>
         </div>

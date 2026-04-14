@@ -3,6 +3,9 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { FileText, Users, GitMerge, BarChart2 } from "lucide-react";
+import { SITE_CONFIG } from "@/lib/config";
+
+const CALENDLY_URL = SITE_CONFIG.calendlyUrl;
 
 // ─── Automation capability data ───────────────────────────────────────────────
 
@@ -41,6 +44,21 @@ const automations = [
   },
 ];
 
+// ─── Tools list (moved from ToolsRow) ────────────────────────────────────────
+
+const tools = [
+  "Zapier",
+  "Make",
+  "HubSpot",
+  "Notion",
+  "Airtable",
+  "OpenAI",
+  "Slack",
+  "Google Workspace",
+  "QuickBooks",
+  "Salesforce",
+];
+
 // ─── FadeUp wrapper ───────────────────────────────────────────────────────────
 
 function FadeUp({
@@ -75,7 +93,7 @@ export default function WhatWeBuild() {
     <section id="services" className="bg-[#0F1B2D] py-20 px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <FadeUp className="text-center mb-14">
+        <FadeUp className="text-center mb-8">
           <p className="text-[#00C9A7] text-sm font-semibold tracking-widest uppercase mb-3">
             What We Build
           </p>
@@ -86,6 +104,34 @@ export default function WhatWeBuild() {
             Real-world systems for the tasks your team does every day — scoped
             upfront, priced transparently, and delivered end-to-end.
           </p>
+        </FadeUp>
+
+        {/* Tools row — integrated here */}
+        <FadeUp delay={0.08} className="mb-10">
+          <div className="text-center">
+            <p className="text-[#FAFAF8]/40 text-xs font-semibold tracking-widest uppercase mb-4">
+              Integrates with your existing tools
+            </p>
+            <div className="flex flex-wrap justify-center gap-2 mb-3">
+              {tools.map((tool) => (
+                <span
+                  key={tool}
+                  className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/8 border border-white/10 text-[#FAFAF8]/70 text-xs font-medium"
+                >
+                  {tool}
+                </span>
+              ))}
+            </div>
+            <p className="text-xs text-[#FAFAF8]/35">
+              Don&apos;t see your stack?{" "}
+              <a
+                href="#contact"
+                className="text-[#00C9A7] hover:underline underline-offset-2"
+              >
+                We work with most business tools — ask us.
+              </a>
+            </p>
+          </div>
         </FadeUp>
 
         {/* Cards grid — 1-col mobile, 2-col desktop */}
@@ -111,17 +157,42 @@ export default function WhatWeBuild() {
                   </p>
 
                   {/* Meta footer */}
-                  <div className="border-t border-white/8 pt-4 flex items-center justify-between gap-4">
+                  <div className="border-t border-white/8 pt-4 flex items-center justify-between gap-4 mb-3">
                     <p className="text-[#FAFAF8]/30 text-xs">{a.detail}</p>
                     <span className="text-[#00C9A7] text-xs font-semibold whitespace-nowrap">
                       {a.buildTime}
                     </span>
                   </div>
+
+                  {/* CTA */}
+                  <a
+                    href={CALENDLY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#00C9A7] text-sm font-semibold hover:underline underline-offset-4 transition"
+                  >
+                    Talk to us about this →
+                  </a>
                 </div>
               </FadeUp>
             );
           })}
         </div>
+
+        {/* Section-level CTA */}
+        <FadeUp delay={0.35} className="text-center mt-10">
+          <p className="text-[#FAFAF8]/50 text-sm mb-4">
+            Don&apos;t see your workflow? We build custom automations too.
+          </p>
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold hover:bg-[#00a88c] transition-colors duration-200 shadow-md shadow-[#00C9A7]/20"
+          >
+            Book a Free Discovery Call
+          </a>
+        </FadeUp>
       </div>
     </section>
   );

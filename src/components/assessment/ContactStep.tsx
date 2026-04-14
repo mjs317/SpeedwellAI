@@ -25,10 +25,10 @@ export default function ContactStep({ value, onChange, error }: ContactStepProps
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-2xl sm:text-3xl font-bold text-[#FAFAF8] mb-1">
-        Let&apos;s start with the basics
+        Where should we send your results?
       </h2>
       <p className="text-[#FAFAF8]/65 text-sm mb-4">
-        We&apos;ll email your personalized report in about a minute.
+        We&apos;ll email your personalized scorecard report in about a minute.
       </p>
 
       <div>

@@ -2,19 +2,16 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Send, CheckCircle, AlertCircle } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/config";
 
 const CALENDLY_URL = SITE_CONFIG.calendlyUrl;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type FormState = "idle" | "submitting" | "success" | "error";
+type FormState = "idle" | "submitting" | "submitted" | "error";
 
 interface FormFields {
-  name: string;
   email: string;
-  company: string;
   timeSink: string;
   message: string;
 }
@@ -56,58 +53,172 @@ const timeSinkOptions = [
   "Other",
 ];
 
-// ─── Contact / CTA Section ────────────────────────────────────────────────────
+// ─── Contact Form ─────────────────────────────────────────────────────────────
 
-export default function Contact() {
-  const [form, setForm] = useState<FormFields>({
-    name: "",
+function ContactForm() {
+  const [formData, setFormData] = useState<FormFields>({
     email: "",
-    company: "",
     timeSink: "",
     message: "",
   });
-  const [state, setState] = useState<FormState>("idle");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const [status, setStatus] = useState<FormState>("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setState("submitting");
-    setErrorMsg("");
+    setStatus("submitting");
 
     try {
-      // TODO: Replace with your actual form handling endpoint (Resend, Formspree, etc.)
-      const res = await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(formData),
       });
 
-      if (!res.ok) throw new Error("Server error");
-
-      setState("success");
-      setForm({ name: "", email: "", company: "", timeSink: "", message: "" });
+      if (response.ok) {
+        setStatus("submitted");
+      } else {
+        setStatus("error");
+      }
     } catch {
-      setState("error");
-      setErrorMsg(
-        "Something went wrong. Please email us directly or try again."
-      );
+      setStatus("error");
     }
   };
+
+  if (status === "submitted") {
+    return (
+      <div className="text-center py-12">
+        <div className="w-14 h-14 rounded-full bg-[#00C9A7]/15 flex items-center justify-center mx-auto mb-5">
+          <svg className="w-7 h-7 text-[#00C9A7]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="text-xl font-bold text-[#FAFAF8] mb-2">We got your message.</h3>
+        <p className="text-[#FAFAF8]/60 text-sm mb-6">
+          We&apos;ll send you a personalized automation recommendation within 1 business day.
+        </p>
+        <a
+          href={CALENDLY_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold text-sm hover:bg-[#00a88c] transition-colors duration-200"
+        >
+          Or skip ahead — Book a Free Discovery Call
+        </a>
+      </div>
+    );
+  }
 
   const inputClass =
     "w-full px-4 py-3 rounded-lg bg-white/10 border border-white/15 text-[#FAFAF8] placeholder-[#FAFAF8]/30 text-sm focus:outline-none focus:border-[#00C9A7] focus:ring-1 focus:ring-[#00C9A7]/50 transition";
 
-  const selectClass =
-    "w-full px-4 py-3 rounded-lg bg-white/10 border border-white/15 text-sm focus:outline-none focus:border-[#00C9A7] focus:ring-1 focus:ring-[#00C9A7]/50 transition appearance-none cursor-pointer";
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-left">
+      {/* Work Email */}
+      <div>
+        <label htmlFor="email" className="block text-xs font-medium text-[#FAFAF8]/50 mb-1.5">
+          Work Email *
+        </label>
+        <input
+          id="email"
+          type="email"
+          required
+          placeholder="jane@company.com"
+          value={formData.email}
+          onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+          className={inputClass}
+        />
+      </div>
 
+      {/* Biggest time sink */}
+      <div>
+        <label htmlFor="timeSink" className="block text-xs font-medium text-[#FAFAF8]/50 mb-1.5">
+          What&apos;s your biggest time sink? *
+        </label>
+        <div className="relative">
+          <select
+            id="timeSink"
+            required
+            value={formData.timeSink}
+            onChange={(e) => setFormData((prev) => ({ ...prev, timeSink: e.target.value }))}
+            className={`w-full px-4 py-3 rounded-lg bg-white/10 border border-white/15 text-sm focus:outline-none focus:border-[#00C9A7] focus:ring-1 focus:ring-[#00C9A7]/50 transition appearance-none cursor-pointer ${formData.timeSink ? "text-[#FAFAF8]" : "text-[#FAFAF8]/30"}`}
+          >
+            <option value="" disabled className="bg-[#0F1B2D] text-[#FAFAF8]/50">
+              Select the area eating most of your team&apos;s time…
+            </option>
+            {timeSinkOptions.map((opt) => (
+              <option key={opt} value={opt} className="bg-[#0F1B2D] text-[#FAFAF8]">
+                {opt}
+              </option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+            <svg className="w-4 h-4 text-[#FAFAF8]/40" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* Message */}
+      <div>
+        <label htmlFor="message" className="block text-xs font-medium text-[#FAFAF8]/50 mb-1.5">
+          Tell us more *
+        </label>
+        <textarea
+          id="message"
+          required
+          rows={4}
+          placeholder="Describe your biggest operational headache — we'll send a personalized recommendation."
+          value={formData.message}
+          onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
+          className={`${inputClass} resize-none`}
+        />
+      </div>
+
+      {/* Submit */}
+      <button
+        type="submit"
+        disabled={status === "submitting"}
+        className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-bold text-base hover:bg-[#00a88c] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#00C9A7]/20"
+      >
+        {status === "submitting" ? (
+          <>
+            <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+            Sending...
+          </>
+        ) : (
+          <>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
+              <path d="m21.854 2.147-10.94 10.939" />
+            </svg>
+            Get My Recommendation
+          </>
+        )}
+      </button>
+
+      {status === "error" && (
+        <div className="mt-2 p-4 rounded-lg bg-red-500/10 border border-red-500/20">
+          <p className="text-red-400 text-sm">
+            Something went wrong. Please try again or email us directly at{" "}
+            <a href="mailto:hello@speedwellai.com" className="underline">hello@speedwellai.com</a>.
+          </p>
+        </div>
+      )}
+
+      <p className="text-xs text-[#FAFAF8]/40 mt-1">
+        <span className="text-[#00C9A7]">✓</span> We respond to all inquiries within 1 business day.
+      </p>
+    </form>
+  );
+}
+
+// ─── Contact / CTA Section ────────────────────────────────────────────────────
+
+export default function Contact() {
   return (
     <section
       id="contact"
@@ -124,7 +235,7 @@ export default function Contact() {
         <FadeUp delay={0.1}>
           <p className="text-[#FAFAF8]/60 text-base sm:text-lg max-w-xl mx-auto mb-10">
             Book a free 30-minute discovery call. We&apos;ll talk through your
-            operations and decide together whether the $499 Assessment is the
+            operations and decide together whether the $499 Deep-Dive Assessment is the
             right next step.
           </p>
         </FadeUp>
@@ -158,171 +269,7 @@ export default function Contact() {
 
         {/* Form */}
         <FadeUp delay={0.35}>
-          {state === "success" ? (
-            <div className="flex flex-col items-center gap-3 py-12 text-[#00C9A7]">
-              <CheckCircle size={40} strokeWidth={1.5} />
-              <p className="text-lg font-semibold">Message received!</p>
-              <p className="text-[#FAFAF8]/50 text-sm">
-                We&apos;ll be in touch within one business day.
-              </p>
-            </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-4 text-left"
-              noValidate
-            >
-              {/* Name + Email */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-xs font-medium text-[#FAFAF8]/50 mb-1.5"
-                  >
-                    Name *
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={handleChange}
-                    placeholder="Jane Smith"
-                    className={inputClass}
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-xs font-medium text-[#FAFAF8]/50 mb-1.5"
-                  >
-                    Work Email *
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="jane@company.com"
-                    className={inputClass}
-                  />
-                </div>
-              </div>
-
-              {/* Company */}
-              <div>
-                <label
-                  htmlFor="company"
-                  className="block text-xs font-medium text-[#FAFAF8]/50 mb-1.5"
-                >
-                  Company
-                </label>
-                <input
-                  id="company"
-                  name="company"
-                  type="text"
-                  value={form.company}
-                  onChange={handleChange}
-                  placeholder="Acme Corp"
-                  className={inputClass}
-                />
-              </div>
-
-              {/* Biggest time sink dropdown */}
-              <div>
-                <label
-                  htmlFor="timeSink"
-                  className="block text-xs font-medium text-[#FAFAF8]/50 mb-1.5"
-                >
-                  What&apos;s your biggest time sink? *
-                </label>
-                <div className="relative">
-                  <select
-                    id="timeSink"
-                    name="timeSink"
-                    required
-                    value={form.timeSink}
-                    onChange={handleChange}
-                    className={`${selectClass} ${
-                      form.timeSink ? "text-[#FAFAF8]" : "text-[#FAFAF8]/30"
-                    }`}
-                  >
-                    <option value="" disabled className="bg-[#0F1B2D] text-[#FAFAF8]/50">
-                      Select the area eating most of your team&apos;s time…
-                    </option>
-                    {timeSinkOptions.map((opt) => (
-                      <option
-                        key={opt}
-                        value={opt}
-                        className="bg-[#0F1B2D] text-[#FAFAF8]"
-                      >
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
-                  {/* Dropdown arrow */}
-                  <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-                    <svg className="w-4 h-4 text-[#FAFAF8]/40" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-
-              {/* Message */}
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-xs font-medium text-[#FAFAF8]/50 mb-1.5"
-                >
-                  Tell us more *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={4}
-                  value={form.message}
-                  onChange={handleChange}
-                  placeholder="Describe your biggest operational headache — we'll send a personalized recommendation."
-                  className={`${inputClass} resize-none`}
-                />
-              </div>
-
-              {/* Error message */}
-              {state === "error" && (
-                <div className="flex items-center gap-2 text-red-400 text-sm">
-                  <AlertCircle size={16} />
-                  {errorMsg}
-                </div>
-              )}
-
-              {/* Submit */}
-              <button
-                type="submit"
-                disabled={state === "submitting"}
-                className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-bold text-base hover:bg-[#00a88c] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#00C9A7]/20"
-              >
-                {state === "submitting" ? (
-                  <>
-                    <span className="w-4 h-4 rounded-full border-2 border-[#0F1B2D]/30 border-t-[#0F1B2D] animate-spin" />
-                    Sending…
-                  </>
-                ) : (
-                  <>
-                    <Send size={15} />
-                    Send Message
-                  </>
-                )}
-              </button>
-              <p className="text-xs text-[#FAFAF8]/40 mt-1">
-                <span className="text-[#00C9A7]">✓</span> We respond to all inquiries within 1 business day.
-              </p>
-            </form>
-          )}
+          <ContactForm />
         </FadeUp>
       </div>
     </section>

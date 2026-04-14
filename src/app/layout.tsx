@@ -98,10 +98,10 @@ const jsonLd = {
         },
         {
           "@type": "Question",
-          name: "Can't I just use ChatGPT?",
+          name: "Can't I just use ChatGPT, Zapier, or Make myself?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "ChatGPT is great for one-off tasks — writing emails, brainstorming ideas, answering questions. But it can't log into your CRM, auto-qualify your leads, trigger follow-up sequences, or push invoice data into QuickBooks. That requires understanding your specific tools, data, and workflows — then building connectors, guardrails, and human-review steps that work in production. We build the systems. ChatGPT is one of many tools we use inside them.",
+            text: "ChatGPT is great for one-off tasks — writing emails, brainstorming ideas, answering questions. But it can't log into your CRM, auto-qualify your leads, trigger follow-up sequences, or push invoice data into QuickBooks. That requires custom system building: connectors, guardrails, and human-review steps that work in production. Zapier and Make are powerful tools — and we use them too. But knowing which workflows to build, how to connect them reliably, and how to handle edge cases is the hard part. That's exactly what we do.",
           },
         },
         {
@@ -150,6 +150,18 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XD59XEWKVP"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XD59XEWKVP');
+          `}
+        </Script>
       </head>
       <body className="antialiased">
         {children}

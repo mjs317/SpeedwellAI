@@ -190,10 +190,8 @@ export default function Hero() {
           custom={0.3}
           className="text-lg sm:text-xl text-[#FAFAF8]/70 max-w-2xl mx-auto leading-relaxed mb-10"
         >
-          Speedwell AI helps small and mid-sized businesses identify, implement,
-          and optimize AI automations — without the enterprise price tag. Unlike
-          vendors who hand you a tool or consultancies who hand you a slide deck,
-          we stay through implementation and make sure it actually works.
+          We help small and mid-sized businesses identify, build, and run AI
+          automations — fixed-price, no fluff, and we stay until it works.
         </motion.p>
 
         {/* CTAs — primary to Calendly, secondary to contact form */}
@@ -213,12 +211,12 @@ export default function Hero() {
           >
             Book a Free Discovery Call
           </a>
-          {/* Secondary — AI readiness assessment lead magnet */}
+          {/* Secondary — free AI readiness scorecard lead magnet */}
           <a
             href="/assessment"
             className="text-[#FAFAF8]/65 font-medium text-sm hover:text-[#FAFAF8] transition-colors duration-200 underline underline-offset-4 decoration-[#FAFAF8]/30 hover:decoration-[#FAFAF8]/60"
           >
-            Get Your AI Readiness Score
+            Get Your Free AI Readiness Score →
           </a>
         </motion.div>
       </div>

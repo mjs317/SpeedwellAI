@@ -64,9 +64,9 @@ export default function ComparisonTable() {
           </p>
         </FadeUp>
 
-        {/* Table — horizontally scrollable on mobile */}
+        {/* Desktop table (md+) */}
         <FadeUp delay={0.1}>
-          <div className="overflow-x-auto rounded-2xl border border-black/8 shadow-sm">
+          <div className="hidden md:block overflow-x-auto rounded-2xl border border-black/8 shadow-sm">
             <table className="w-full min-w-[560px] text-sm">
               <thead>
                 <tr>
@@ -99,6 +99,60 @@ export default function ComparisonTable() {
             </table>
           </div>
         </FadeUp>
+
+        {/* Mobile stacked cards (below md) */}
+        <div className="md:hidden flex flex-col gap-4">
+          {/* Speedwell AI card — highlighted, shown first */}
+          <FadeUp delay={0.08}>
+            <div className="rounded-2xl border-2 border-[#00C9A7] bg-[#0F1B2D]/[0.03] overflow-hidden">
+              <div className="bg-[#0F1B2D] px-5 py-3">
+                <p className="text-[#00C9A7] text-xs font-bold uppercase tracking-wider">Speedwell AI ✓</p>
+              </div>
+              <div className="divide-y divide-black/5">
+                {rows.map((row, i) => (
+                  <div key={i} className="px-5 py-3 flex justify-between items-start gap-4">
+                    <p className="text-[#6B7280] text-xs font-medium min-w-0 shrink-0">{row.label}</p>
+                    <p className="text-[#0F1B2D] text-xs font-semibold text-right">{row.speedwell}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FadeUp>
+
+          {/* Big Consultancy card */}
+          <FadeUp delay={0.14}>
+            <div className="rounded-2xl border border-black/10 bg-white overflow-hidden">
+              <div className="bg-[#F5F5F3] px-5 py-3">
+                <p className="text-[#6B7280] text-xs font-semibold uppercase tracking-wider">Big Consultancy</p>
+              </div>
+              <div className="divide-y divide-black/5">
+                {rows.map((row, i) => (
+                  <div key={i} className="px-5 py-3 flex justify-between items-start gap-4">
+                    <p className="text-[#6B7280] text-xs font-medium min-w-0 shrink-0">{row.label}</p>
+                    <p className="text-[#6B7280] text-xs text-right">{row.big}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FadeUp>
+
+          {/* DIY / Freelancer card */}
+          <FadeUp delay={0.2}>
+            <div className="rounded-2xl border border-black/10 bg-white overflow-hidden">
+              <div className="bg-[#F5F5F3] px-5 py-3">
+                <p className="text-[#6B7280] text-xs font-semibold uppercase tracking-wider">DIY / Freelancer</p>
+              </div>
+              <div className="divide-y divide-black/5">
+                {rows.map((row, i) => (
+                  <div key={i} className="px-5 py-3 flex justify-between items-start gap-4">
+                    <p className="text-[#6B7280] text-xs font-medium min-w-0 shrink-0">{row.label}</p>
+                    <p className="text-[#6B7280] text-xs text-right">{row.diy}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FadeUp>
+        </div>
 
         {/* CTA */}
         <FadeUp delay={0.25} className="text-center mt-10">

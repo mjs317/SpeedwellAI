@@ -40,14 +40,9 @@ const faqs = [
       "We help small and mid-sized businesses identify the manual, repetitive tasks that are costing them time and money — then we build and deploy the AI automations to eliminate them. Think automated invoicing, smart follow-up sequences, document processing, scheduling, and more.",
   },
   {
-    question: "Can't I just use ChatGPT?",
+    question: "Can't I just use ChatGPT, Zapier, or Make myself?",
     answer:
-      "ChatGPT is great for one-off tasks — writing emails, brainstorming ideas, answering questions. But it can't log into your CRM, auto-qualify your leads, trigger follow-up sequences, or push invoice data into QuickBooks. That requires understanding your specific tools, data, and workflows — then building connectors, guardrails, and human-review steps that work in production. We build the systems. ChatGPT is one of many tools we use inside them.",
-  },
-  {
-    question: "How is this different from just using Zapier or ChatGPT?",
-    answer:
-      "Zapier and ChatGPT are tools — and great ones. But most businesses don't have the time or expertise to figure out which automations to build, how to connect them securely, or how to maintain them over time. We handle the strategy, the build, and the ongoing optimization so you can focus on running your business.",
+      "ChatGPT is great for one-off tasks — writing emails, brainstorming ideas, answering questions. But it can't log into your CRM, auto-qualify your leads, trigger follow-up sequences, or push invoice data into QuickBooks. That requires custom system building: connectors, guardrails, and human-review steps that work in production. Zapier and Make are powerful tools — and we use them too. But knowing which workflows to build, how to connect them reliably, and how to handle edge cases is the hard part. Most businesses don't have the time or in-house expertise to get this right. That's exactly what we do.",
   },
   {
     question: "What does the $499 assessment include?",
