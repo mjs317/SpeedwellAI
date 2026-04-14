@@ -1,11 +1,21 @@
 // ─── Email HTML templates ───────────────────────────────────────────────────
 
 import { SITE_CONFIG } from "@/lib/config";
-import { DimensionScores, Recommendation, Tier } from "@/lib/assessment/scoring";
+import {
+  DimensionScores,
+  Recommendation,
+  getAutomationPotential,
+  getOpportunityTier,
+  getOpportunityDimensions,
+} from "@/lib/assessment/scoring";
 
 const NAVY = "#0F1B2D";
 const TEAL = "#00C9A7";
 const WARM_WHITE = "#FAFAF8";
+
+function titleCase(s: string): string {
+  return s.replace(/\b\w/g, (c) => c.toUpperCase());
+}
 
 function wrap(bodyHtml: string): string {
   // Head styles defend against mail clients (Apple Mail, Outlook, Gmail
@@ -69,7 +79,6 @@ export interface ReportEmailInput {
   name: string;
   company: string;
   overall: number;
-  tier: Tier;
   dimensions: DimensionScores;
 }
 
@@ -77,18 +86,25 @@ export function reportEmail(input: ReportEmailInput): {
   subject: string;
   html: string;
 } {
-  const subject = `Your AI Readiness Report — ${input.company}`;
+  const automationPotential = getAutomationPotential(input.overall);
+  const opportunityTier = getOpportunityTier(automationPotential);
+  const oppDimensions = getOpportunityDimensions(input.dimensions);
+  const displayName = titleCase(input.name.trim());
+
+  const subject = `Your AI Automation Opportunity Report — Speedwell AI`;
   const html = wrap(`
-    <p>Hi ${escapeHtml(input.name)},</p>
-    <p>Thanks for taking the Speedwell AI Readiness Assessment. Here's your snapshot:</p>
+    <p>Hi ${escapeHtml(displayName)},</p>
+    <p>Your AI Automation Opportunity Report is attached. Here's a quick snapshot of your results:</p>
     <div style="background:#fff;border:1px solid #e6e6e8;border-radius:10px;padding:18px 20px;margin:16px 0;">
-      <div style="font-size:14px;margin-bottom:10px;"><strong>Overall Score:</strong> ${input.overall}/100 — <span style="color:${TEAL};font-weight:600;">${input.tier}</span></div>
-      <div style="font-size:13px;margin:4px 0;">Process Maturity: <strong>${input.dimensions.process_maturity}%</strong></div>
-      <div style="font-size:13px;margin:4px 0;">Technical Readiness: <strong>${input.dimensions.technical_readiness}%</strong></div>
-      <div style="font-size:13px;margin:4px 0;">Organizational Readiness: <strong>${input.dimensions.organizational_readiness}%</strong></div>
+      <div style="font-size:28px;font-weight:700;color:${TEAL};margin-bottom:2px;">${automationPotential}%</div>
+      <div style="font-size:12px;color:#6B7280;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em;">Automation Potential</div>
+      <div style="font-size:15px;font-weight:600;color:${NAVY};margin-bottom:14px;">${escapeHtml(opportunityTier)}</div>
+      <div style="font-size:13px;margin:4px 0;">${escapeHtml(oppDimensions.processAutomationPotential.label)}: <strong>${oppDimensions.processAutomationPotential.pct}%</strong></div>
+      <div style="font-size:13px;margin:4px 0;">${escapeHtml(oppDimensions.toolIntegrationOpportunity.label)}: <strong>${oppDimensions.toolIntegrationOpportunity.pct}%</strong></div>
+      <div style="font-size:13px;margin:4px 0;">${escapeHtml(oppDimensions.teamEfficiencyOpportunity.label)}: <strong>${oppDimensions.teamEfficiencyOpportunity.pct}%</strong></div>
     </div>
-    <p>Your full report is attached.</p>
-    <p>Want to talk through your results?</p>
+    <p>Your full report is attached — it includes your top automation recommendations and a detailed breakdown of where the biggest opportunities are.</p>
+    <p>Want to talk through what this means for your business?</p>
     <p>${ctaButton("Book a Free Discovery Call", SITE_CONFIG.calendlyUrl)}</p>
     <p style="margin-top:32px;">— Michael, Speedwell AI</p>
   `);
@@ -98,7 +114,6 @@ export function reportEmail(input: ReportEmailInput): {
 export interface Day3EmailInput {
   name: string;
   overall: number;
-  tier: Tier;
   lowestDimensionLabel: string;
   topRecommendation: Recommendation;
 }
@@ -107,10 +122,14 @@ export function day3Email(input: Day3EmailInput): {
   subject: string;
   html: string;
 } {
-  const subject = "A quick thought on your AI readiness results";
+  const automationPotential = getAutomationPotential(input.overall);
+  const opportunityTier = getOpportunityTier(automationPotential);
+  const displayName = titleCase(input.name.trim());
+
+  const subject = "A quick thought on your automation results";
   const html = wrap(`
-    <p>Hi ${escapeHtml(input.name)},</p>
-    <p>A few days ago you took our AI Readiness Assessment and scored <strong>${input.overall}/100 (${input.tier})</strong>.</p>
+    <p>Hi ${escapeHtml(displayName)},</p>
+    <p>A few days ago you completed our AI Readiness Scorecard. Your results showed <strong>${automationPotential}% Automation Potential</strong> — rated <span style="color:${TEAL};font-weight:600;">${escapeHtml(opportunityTier)}</span>.</p>
     <p>Based on your results, your biggest opportunity is in <strong>${escapeHtml(
       input.lowestDimensionLabel
     )}</strong>. Here's what that looks like in practice:</p>
@@ -137,13 +156,16 @@ export function day7Email(input: Day7EmailInput): {
   subject: string;
   html: string;
 } {
+  const automationPotential = getAutomationPotential(input.overall);
+  const displayName = titleCase(input.name.trim());
+
   const subject = `Quick question about ${input.company}`;
   const html = wrap(`
-    <p>Hi ${escapeHtml(input.name)},</p>
-    <p>Last week you scored <strong>${input.overall}/100</strong> on our AI Readiness Assessment. I wanted to check in — has anything changed in how you're thinking about automating <strong>${escapeHtml(input.painPointArea)}</strong>?</p>
-    <p>If you're still exploring, our ${SITE_CONFIG.assessmentPrice} AI Readiness Sprint might be a good fit. It's a deep-dive audit of your actual workflows with a prioritized roadmap showing exactly where to start — and the ${SITE_CONFIG.assessmentPrice} is credited in full if you move forward with an implementation.</p>
+    <p>Hi ${escapeHtml(displayName)},</p>
+    <p>Last week you scored <strong>${automationPotential}% Automation Potential</strong> on our AI Readiness Scorecard. I wanted to check in — has anything changed in how you're thinking about automating <strong>${escapeHtml(input.painPointArea)}</strong>?</p>
+    <p>If you're still exploring, a free 30-minute discovery call is a good place to start. We'll walk through your results, identify your highest-leverage workflow, and map out what a first automation could look like — no commitment required.</p>
     <p>Happy to chat if it would help:</p>
-    <p>${ctaButton("Book a Call", SITE_CONFIG.calendlyUrl)}</p>
+    <p>${ctaButton("Book a Free Discovery Call", SITE_CONFIG.calendlyUrl)}</p>
     <p>Either way, no pressure. Just wanted to make sure the report was useful.</p>
     <p style="margin-top:32px;">— Michael, Speedwell AI</p>
   `);
@@ -158,7 +180,7 @@ export interface InternalNotificationInput {
   company: string;
   teamSize?: string;
   overall: number;
-  tier: Tier;
+  tier: string;
   dimensions: DimensionScores;
   painPoint: string;
   painPointOther?: string;
@@ -171,7 +193,9 @@ export interface InternalNotificationInput {
 export function internalNotificationEmail(
   input: InternalNotificationInput
 ): { subject: string; html: string } {
-  const subject = `[Assessment Lead] ${input.company} — ${input.overall}/100 (${input.tier})`;
+  const automationPotential = getAutomationPotential(input.overall);
+  const opportunityTier = getOpportunityTier(automationPotential);
+  const subject = `[Assessment Lead] ${input.company} — ${automationPotential}% potential (${opportunityTier})`;
 
   const rows = (obj: Record<string, string | number | undefined>) =>
     Object.entries(obj)
@@ -182,19 +206,22 @@ export function internalNotificationEmail(
       )
       .join("");
 
+  const oppDimensions = getOpportunityDimensions(input.dimensions);
+
   const html = wrap(`
-    <h2 style="font-size:18px;margin:0 0 12px;">New AI Readiness Assessment lead</h2>
+    <h2 style="font-size:18px;margin:0 0 12px;">New AI Readiness Scorecard lead</h2>
     <table style="border-collapse:collapse;font-size:14px;">
       ${rows({
         Name: input.name,
         Email: input.email,
         Company: input.company,
         "Team size": input.teamSize,
-        "Overall score": `${input.overall}/100`,
-        Tier: input.tier,
-        "Process Maturity": `${input.dimensions.process_maturity}%`,
-        "Technical Readiness": `${input.dimensions.technical_readiness}%`,
-        "Organizational Readiness": `${input.dimensions.organizational_readiness}%`,
+        "Automation Potential": `${automationPotential}%`,
+        "Opportunity Tier": opportunityTier,
+        "Readiness Score (raw)": `${input.overall}/100`,
+        "Process Automation Potential": `${oppDimensions.processAutomationPotential.pct}%`,
+        "Tool Integration Opportunity": `${oppDimensions.toolIntegrationOpportunity.pct}%`,
+        "Team Efficiency Opportunity": `${oppDimensions.teamEfficiencyOpportunity.pct}%`,
         "Pain point": input.painPoint,
         "Pain point (other)": input.painPointOther,
       })}

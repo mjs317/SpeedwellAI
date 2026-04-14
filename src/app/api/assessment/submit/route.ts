@@ -102,10 +102,9 @@ export async function POST(req: NextRequest) {
       name,
       company,
       overall: score.overall,
-      tier: score.tier,
-      tierDescription: score.tierDescription,
       dimensions: score.dimensions,
       recommendations,
+      painPoint,
     });
     pdfBuffer = Buffer.from(bytes);
   } catch (err) {
@@ -145,7 +144,6 @@ export async function POST(req: NextRequest) {
     name,
     company,
     overall: score.overall,
-    tier: score.tier,
     dimensions: score.dimensions,
   });
   const leadEmailResult = await sendEmail({
@@ -155,7 +153,7 @@ export async function POST(req: NextRequest) {
     attachments: pdfBuffer
       ? [
           {
-            filename: `Speedwell-AI-Readiness-Report-${company.replace(/[^a-z0-9]+/gi, "-")}.pdf`,
+            filename: `Speedwell-AI-Automation-Opportunity-Report-${company.replace(/[^a-z0-9]+/gi, "-")}.pdf`,
             content: pdfBuffer,
           },
         ]
