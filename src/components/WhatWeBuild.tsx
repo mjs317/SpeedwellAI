@@ -72,7 +72,7 @@ function FadeUp({
 
 export default function WhatWeBuild() {
   return (
-    <section id="what-we-build" className="bg-[#0F1B2D] py-24 px-6 lg:px-8">
+    <section id="services" className="bg-[#0F1B2D] py-20 px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <FadeUp className="text-center mb-14">
@@ -83,8 +83,8 @@ export default function WhatWeBuild() {
             Automations that run while you work.
           </h2>
           <p className="mt-4 text-[#FAFAF8]/60 text-lg max-w-2xl mx-auto">
-            These are the types of systems we build — scoped upfront, priced
-            transparently, and delivered end-to-end.
+            Real-world systems for the tasks your team does every day — scoped
+            upfront, priced transparently, and delivered end-to-end.
           </p>
         </FadeUp>
 

@@ -3,8 +3,7 @@
 
 export const SITE_CONFIG = {
   calendlyUrl: "https://calendly.com/speedwellai/30min",
-  // TODO: Update linkedInUrl with your actual LinkedIn profile slug
-  linkedInUrl: "https://www.linkedin.com/in/YOUR_LINKEDIN",
+  linkedInUrl: "https://www.linkedin.com/in/michaelsolimini/",
   email: "michael@speedwell-ai.com",
   siteName: "Speedwell AI",
   siteUrl: "https://speedwellai.com",

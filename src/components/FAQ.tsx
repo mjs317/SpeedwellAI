@@ -143,7 +143,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="bg-[#FAFAF8] py-24 px-6 lg:px-8"
+      className="bg-[#FAFAF8] py-20 px-6 lg:px-8"
     >
       <div className="max-w-3xl mx-auto">
         {/* Section header */}

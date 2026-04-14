@@ -82,7 +82,7 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="bg-[#0F1B2D] py-24 px-6 lg:px-8"
+      className="bg-[#0F1B2D] py-20 px-6 lg:px-8"
     >
       <div className="max-w-6xl mx-auto">
         {/* Section header — mb reduced from 16→8 to cut dead space before cards */}
