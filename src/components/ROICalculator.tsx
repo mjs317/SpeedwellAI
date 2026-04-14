@@ -60,7 +60,7 @@ export default function ROICalculator() {
   return (
     <section
       id="roi-calculator"
-      className="bg-[#0F1B2D] py-24 px-6 lg:px-8"
+      className="bg-[#0F1B2D] py-20 px-6 lg:px-8"
     >
       <div className="max-w-4xl mx-auto">
         {/* Header */}

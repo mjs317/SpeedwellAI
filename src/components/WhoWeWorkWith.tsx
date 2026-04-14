@@ -65,7 +65,7 @@ export default function WhoWeWorkWith() {
   return (
     <section
       id="who-we-work-with"
-      className="bg-[#0F1B2D] py-24 px-6 lg:px-8"
+      className="bg-[#0F1B2D] py-16 px-6 lg:px-8"
     >
       <div className="max-w-5xl mx-auto">
         {/* Header */}

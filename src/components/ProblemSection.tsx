@@ -86,19 +86,22 @@ const stats = [
   {
     target: 40,
     suffix: "%",
+    staticValue: null,
     label: "of business tasks can be automated today",
     citation: "McKinsey Global Institute",
   },
   {
-    target: 6,
-    suffix: " wks",
-    label: "average project delivery, from kickoff to deployment",
-    citation: "Speedwell AI average",
+    target: 10,
+    suffix: " hrs/wk",
+    staticValue: null,
+    label: "average time SMB employees spend on tasks AI can handle",
+    citation: "industry average",
   },
   {
-    target: 40,
-    suffix: "+",
-    label: "automations built and deployed for growing businesses",
+    target: 3,
+    suffix: " wks",
+    staticValue: null,
+    label: "typical time from kickoff to first automation live",
     citation: "Speedwell AI",
   },
 ];
@@ -109,7 +112,7 @@ export default function ProblemSection() {
   return (
     <section
       id="problem"
-      className="relative bg-[#FAFAF8] py-24 px-6 lg:px-8 overflow-hidden"
+      className="relative bg-[#FAFAF8] py-16 px-6 lg:px-8 overflow-hidden"
     >
       <div className="max-w-5xl mx-auto">
         {/* Main copy */}
@@ -135,7 +138,11 @@ export default function ProblemSection() {
             <FadeUp key={stat.label} delay={0.15 + i * 0.1}>
               <div className="text-center">
                 <p className="text-4xl sm:text-5xl font-bold text-[#0F1B2D] tracking-tight">
-                  <CountUp target={stat.target} suffix={stat.suffix} />
+                  {stat.staticValue !== null ? (
+                    stat.staticValue
+                  ) : (
+                    <CountUp target={stat.target!} suffix={stat.suffix} />
+                  )}
                 </p>
                 <p className="mt-2 text-sm text-[#6B7280] leading-snug">
                   {stat.label}
