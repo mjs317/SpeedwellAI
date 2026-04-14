@@ -41,7 +41,7 @@ const steps: Step[] = [
   {
     number: "03",
     title: "Optimization Retainer",
-    price: "Flexible monthly plans — most clients start under $2k/mo",
+    price: "Flexible monthly support — scaled to your business, no long-term contract",
     description: "Stay ahead, continuously.",
     detail:
       "Ongoing support, new builds, staff training, and quarterly reviews. Your automations improve as your business grows.",
