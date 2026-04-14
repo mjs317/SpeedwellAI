@@ -8,7 +8,39 @@ const TEAL = "#00C9A7";
 const WARM_WHITE = "#FAFAF8";
 
 function wrap(bodyHtml: string): string {
-  return `<!doctype html><html><body style="margin:0;padding:0;background:${WARM_WHITE};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:${NAVY};line-height:1.55;">
+  // Head styles defend against mail clients (Apple Mail, Outlook, Gmail
+  // dark mode) that auto-invert button text and break contrast.
+  // `color-scheme` tells the client the email is designed for both modes.
+  return `<!doctype html><html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
+    <style>
+      /* Prevent iOS/Apple Mail from auto-linking phone numbers, etc. */
+      a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
+      /* Bulletproof CTA button — enforce explicit colors so dark-mode
+         inversion cannot wash out the label. */
+      .sw-btn, .sw-btn a {
+        color: #FAFAF8 !important;
+        -webkit-text-fill-color: #FAFAF8 !important;
+      }
+      .sw-btn {
+        background: #0F1B2D !important;
+      }
+      @media (prefers-color-scheme: dark) {
+        .sw-btn, .sw-btn a {
+          color: #FAFAF8 !important;
+          -webkit-text-fill-color: #FAFAF8 !important;
+        }
+        .sw-btn {
+          background: #0F1B2D !important;
+        }
+      }
+    </style>
+  </head>
+  <body style="margin:0;padding:0;background:${WARM_WHITE};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:${NAVY};line-height:1.55;">
     <div style="max-width:560px;margin:0 auto;padding:32px 24px;">
       <div style="font-size:22px;font-weight:700;margin-bottom:24px;">
         <span style="color:${NAVY};">Speedwell</span><span style="color:${TEAL};">.AI</span>
@@ -20,8 +52,17 @@ function wrap(bodyHtml: string): string {
   </body></html>`;
 }
 
+// Navy-background / white-text button with teal left accent. This reads
+// cleanly in both light and dark email clients — dark-mode inversion can't
+// hide white text on near-black.
 function ctaButton(label: string, url: string): string {
-  return `<a href="${url}" style="display:inline-block;background:${TEAL};color:${NAVY};text-decoration:none;font-weight:600;padding:12px 22px;border-radius:8px;">${label}</a>`;
+  return `<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="border-collapse:separate;">
+    <tr>
+      <td class="sw-btn" style="background:${NAVY};border-radius:8px;border-left:3px solid ${TEAL};mso-padding-alt:12px 22px;">
+        <a href="${url}" style="display:inline-block;padding:12px 22px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;font-weight:600;color:${WARM_WHITE};text-decoration:none;letter-spacing:0.01em;" target="_blank" rel="noopener">${label}</a>
+      </td>
+    </tr>
+  </table>`;
 }
 
 export interface ReportEmailInput {

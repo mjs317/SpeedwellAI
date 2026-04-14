@@ -16,7 +16,7 @@
 //
 // Routes excluded: /assessment, /admin/*
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
@@ -58,21 +58,45 @@ export default function AssessmentPopup() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [armed, setArmed] = useState(false);
+  // Once fired or dismissed during this SPA session, never re-arm — even if
+  // the user navigates between pages (prevents re-triggering on /assessment).
+  const sessionDoneRef = useRef(false);
 
-  // Decide on mount whether this visitor + this route is eligible
+  // Decide eligibility on every route change. Important: this must also
+  // DISARM when we land on an excluded route (otherwise a previously-armed
+  // popup will keep firing on /assessment after client-side navigation).
   useEffect(() => {
-    if (isExcludedPath(pathname)) return;
-    if (shouldSuppress()) return;
+    if (sessionDoneRef.current) {
+      setArmed(false);
+      return;
+    }
+    if (isExcludedPath(pathname)) {
+      setArmed(false);
+      return;
+    }
+    if (shouldSuppress()) {
+      setArmed(false);
+      return;
+    }
     setArmed(true);
   }, [pathname]);
 
   // Wire up the three triggers
   useEffect(() => {
     if (!armed || open) return;
+    // Defensive double-check — if suppression was set asynchronously
+    // (e.g. via another tab), don't fire.
+    if (shouldSuppress()) {
+      setArmed(false);
+      return;
+    }
+
     let cancelled = false;
     const fire = () => {
       if (cancelled) return;
       cancelled = true;
+      sessionDoneRef.current = true;
+      setArmed(false);
       setOpen(true);
     };
 
@@ -122,17 +146,22 @@ export default function AssessmentPopup() {
     } catch {
       /* noop */
     }
+    sessionDoneRef.current = true;
+    setArmed(false);
     setOpen(false);
   }
 
   function handleCtaClick() {
     // Treat clicking through as engagement — suppress the same way as
-    // dismissal so the modal doesn't reappear during this visit.
+    // dismissal so the modal doesn't reappear during this visit (or on
+    // subsequent pages via client-side navigation).
     try {
       window.localStorage.setItem(DISMISSED_KEY, String(Date.now()));
     } catch {
       /* noop */
     }
+    sessionDoneRef.current = true;
+    setArmed(false);
     setOpen(false);
   }
 
