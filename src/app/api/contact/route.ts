@@ -8,14 +8,15 @@ function isValidEmail(email: string): boolean {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { email, timeSink, message } = body as {
+    const { name, email, timeSink, message } = body as {
+      name?: string;
       email?: string;
       timeSink?: string;
       message?: string;
     };
 
     // Validate required fields
-    if (!email?.trim() || !timeSink?.trim() || !message?.trim()) {
+    if (!name?.trim() || !email?.trim() || !timeSink?.trim() || !message?.trim()) {
       return NextResponse.json(
         { error: "All fields are required" },
         { status: 400 }
@@ -38,6 +39,7 @@ export async function POST(request: Request) {
       text: [
         `New inquiry from the Speedwell AI website`,
         ``,
+        `Name: ${name.trim()}`,
         `Email: ${email.trim()}`,
         `Biggest Time Sink: ${timeSink}`,
         ``,

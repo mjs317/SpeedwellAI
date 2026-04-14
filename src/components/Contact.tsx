@@ -11,6 +11,7 @@ const CALENDLY_URL = SITE_CONFIG.calendlyUrl;
 type FormState = "idle" | "submitting" | "submitted" | "error";
 
 interface FormFields {
+  name: string;
   email: string;
   timeSink: string;
   message: string;
@@ -57,6 +58,7 @@ const timeSinkOptions = [
 
 function ContactForm() {
   const [formData, setFormData] = useState<FormFields>({
+    name: "",
     email: "",
     timeSink: "",
     message: "",
@@ -113,6 +115,22 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-left">
+      {/* Name */}
+      <div>
+        <label htmlFor="contact-name" className="block text-xs font-medium text-[#FAFAF8]/50 mb-1.5">
+          Your Name *
+        </label>
+        <input
+          id="contact-name"
+          type="text"
+          required
+          placeholder="Jane Smith"
+          value={formData.name}
+          onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
+          className={inputClass}
+        />
+      </div>
+
       {/* Work Email */}
       <div>
         <label htmlFor="email" className="block text-xs font-medium text-[#FAFAF8]/50 mb-1.5">
