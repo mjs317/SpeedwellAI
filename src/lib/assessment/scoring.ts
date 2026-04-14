@@ -18,6 +18,83 @@ export type Tier =
   | "Ready to Scale"
   | "Advanced";
 
+// ─── Opportunity framing (used in PDF + emails) ───────────────────────────────
+
+export type OpportunityTier =
+  | "Very High Potential"
+  | "High Potential"
+  | "Moderate Potential"
+  | "Optimized";
+
+const OPPORTUNITY_TIER_DESCRIPTIONS: Record<OpportunityTier, string> = {
+  "Very High Potential":
+    "Your business has significant automation opportunities across multiple areas. Even small changes will drive major efficiency gains.",
+  "High Potential":
+    "There are clear, high-impact workflows ready to be automated. You're in the sweet spot for quick wins.",
+  "Moderate Potential":
+    "You've already automated some basics. Targeted automations in key areas will unlock the next level of efficiency.",
+  Optimized:
+    "You're ahead of most businesses your size. Opportunities exist in advanced AI applications and optimization of existing systems.",
+};
+
+/** Inverts a readiness score (0–100) into an automation potential (0–100). */
+export function getAutomationPotential(readinessScore: number): number {
+  return 100 - readinessScore;
+}
+
+export function getOpportunityTier(potential: number): OpportunityTier {
+  if (potential >= 70) return "Very High Potential";
+  if (potential >= 50) return "High Potential";
+  if (potential >= 30) return "Moderate Potential";
+  return "Optimized";
+}
+
+export function getOpportunityTierDescription(potential: number): string {
+  return OPPORTUNITY_TIER_DESCRIPTIONS[getOpportunityTier(potential)];
+}
+
+export interface OpportunityDimension {
+  label: string;
+  pct: number;
+  explanation: string;
+}
+
+export interface OpportunityDimensions {
+  processAutomationPotential: OpportunityDimension;
+  toolIntegrationOpportunity: OpportunityDimension;
+  teamEfficiencyOpportunity: OpportunityDimension;
+}
+
+/**
+ * Converts raw readiness dimension scores into opportunity-framed values.
+ *
+ * - Process Automation Potential: keep raw value (50% maturity = 50% potential)
+ * - Tool Integration Opportunity: invert (low tech readiness = high integration upside)
+ * - Team Efficiency Opportunity: keep raw value
+ */
+export function getOpportunityDimensions(
+  d: DimensionScores
+): OpportunityDimensions {
+  return {
+    processAutomationPotential: {
+      label: "Process Automation Potential",
+      pct: d.process_maturity,
+      explanation: "How much of your day-to-day workflow can be automated.",
+    },
+    toolIntegrationOpportunity: {
+      label: "Tool Integration Opportunity",
+      pct: 100 - d.technical_readiness,
+      explanation:
+        "How much efficiency you can unlock by connecting your existing tools.",
+    },
+    teamEfficiencyOpportunity: {
+      label: "Team Efficiency Opportunity",
+      pct: d.organizational_readiness,
+      explanation: "How much time your team can reclaim through automation.",
+    },
+  };
+}
+
 export interface DimensionScores {
   process_maturity: number;
   technical_readiness: number;
@@ -129,23 +206,23 @@ const PAIN_POINT_RECOMMENDATIONS: Record<PainPoint, Recommendation> = {
     body: "Automate document collection, e-signatures, and CRM updates so new clients go from signed to fully onboarded in hours, not days. Typical build time: 2–4 weeks.",
   },
   Other: {
-    title: "Start With a $499 AI Readiness Assessment",
-    body: "Based on your answer, the right next step is a deep-dive audit of your actual workflows. We'll map your biggest time sinks and hand you a prioritized roadmap. The $499 is credited toward any implementation project.",
+    title: "Tool Stack Integration Review",
+    body: "Based on your answers, a focused integration review — connecting the tools you already use every day — is likely your highest-leverage starting point. We'd map your workflows and identify the 2–3 automations with the fastest payback.",
   },
 };
 
 const DIMENSION_RECOMMENDATIONS: Record<Dimension, Recommendation> = {
   process_maturity: {
     title: "Process Documentation & Workflow Audit",
-    body: "Your lowest-scoring area is Process Maturity. Before automating, we'd recommend a light-touch process audit to document the handful of core workflows that matter most — automation built on undocumented processes tends to amplify chaos.",
+    body: "Your highest opportunity is in Process Automation. A light-touch workflow audit to document your core processes will unlock automations that deliver immediate time savings.",
   },
   technical_readiness: {
     title: "Tool Stack Integration Review",
-    body: "Your lowest-scoring area is Technical Readiness. A focused integration review — connecting the 2–3 tools you already use every day — will unlock automations that were previously blocked by data silos.",
+    body: "Your highest opportunity is in Tool Integration. Connecting the 2–3 tools you already use every day will unlock automations that were previously blocked by data silos.",
   },
   organizational_readiness: {
     title: "Start With a Small, Visible Pilot",
-    body: "Your lowest-scoring area is Organizational Readiness. The fastest way to build momentum is a single, high-visibility pilot automation your team can feel in week one — confidence and buy-in compound from there.",
+    body: "The fastest way to build momentum is a single, high-visibility pilot automation your team can feel in week one — confidence and buy-in compound from there.",
   },
 };
 

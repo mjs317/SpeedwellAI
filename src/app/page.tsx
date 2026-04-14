@@ -6,8 +6,8 @@
 
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import YourPath from "@/components/YourPath";
 import ProblemSection from "@/components/ProblemSection";
-import ToolsRow from "@/components/ToolsRow";
 import HowItWorks from "@/components/HowItWorks";
 import WhatWeBuild from "@/components/WhatWeBuild";
 import WhoWeWorkWith from "@/components/WhoWeWorkWith";
@@ -18,6 +18,7 @@ import FAQ from "@/components/FAQ";
 import ROICalculator from "@/components/ROICalculator";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import StickyCtaBar from "@/components/StickyCtaBar";
 
 export default function Home() {
   return (
@@ -29,16 +30,16 @@ export default function Home() {
         {/* 1. Hero */}
         <Hero />
 
-        {/* 2. Problem / credibility stats with animated count-up + citations */}
-        <ProblemSection />
+        {/* 2. Your Path — three entry points value ladder */}
+        <YourPath />
 
-        {/* 3. Tools we work with */}
-        <ToolsRow />
+        {/* 3. Problem / credibility stats with animated count-up + citations */}
+        <ProblemSection />
 
         {/* 4. How It Works — 3 steps with timing + credit badge on Assessment */}
         <HowItWorks />
 
-        {/* 5. What We Build — merged services section (detailed cards with build times) */}
+        {/* 5. What We Build — services section with tools row integrated */}
         <WhatWeBuild />
 
         {/* 6. Who We Work With — 3 always-visible persona cards */}
@@ -64,6 +65,9 @@ export default function Home() {
       </main>
 
       <Footer />
+
+      {/* Sticky CTA bar — appears after scrolling past results section */}
+      <StickyCtaBar />
     </>
   );
 }

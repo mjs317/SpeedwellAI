@@ -31,10 +31,10 @@ function FadeUp({
 }
 
 const credentials = [
-  "Big 4 Consulting Background",
-  "AI Governance & Automation",
-  "Hands-On Delivery",
-  "Fixed-Price, No Surprises",
+  "7+ Years Big 4 Advisory",
+  "AI Governance & Risk Specialist",
+  "20+ Automation Projects Delivered",
+  "Fortune 500 Advisory Background",
 ];
 
 // ─── About Section ────────────────────────────────────────────────────────────
@@ -58,12 +58,13 @@ export default function About() {
 
         <FadeUp delay={0.18}>
           <p className="text-[#6B7280] text-base sm:text-lg leading-relaxed mb-4 text-left">
-            Our team brings nearly a decade of Big 4 consulting experience —
-            spanning audit, AI governance, and automation strategy for large
-            enterprises. We watched firsthand as firms charged six-figure
-            retainers for AI transformations that never reached the businesses
-            that needed them most. Small and mid-sized companies were either
-            handed tools with no support, or priced out entirely.
+            Our founder spent 7 years in Big 4 assurance and AI governance —
+            advising Fortune 500 companies on the same automation strategies we
+            now deliver to growing businesses. We watched firsthand as firms
+            charged six-figure retainers for AI transformations that never
+            reached the businesses that needed them most. Small and mid-sized
+            companies were either handed tools with no support, or priced out
+            entirely.
           </p>
           <p className="text-[#6B7280] text-base sm:text-lg leading-relaxed mb-8 text-left">
             We started Speedwell to close that gap: enterprise-grade automation

@@ -4,7 +4,7 @@
 export const SITE_CONFIG = {
   calendlyUrl: "https://calendly.com/speedwellai/30min",
   linkedInUrl: "https://www.linkedin.com/in/michaelsolimini/",
-  email: "michael@speedwell-ai.com",
+  email: "hello@speedwellai.com",
   siteName: "Speedwell AI",
   siteUrl: "https://speedwellai.com",
   siteDescription:

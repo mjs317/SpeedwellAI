@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Blog — Speedwell AI",
   description:
     "Practical guides on AI automation for small and mid-sized businesses. No hype — just clear, actionable content.",
+  alternates: {
+    canonical: `${SITE_CONFIG.siteUrl}/blog`,
+  },
   openGraph: {
     title: "Blog — Speedwell AI",
     description:

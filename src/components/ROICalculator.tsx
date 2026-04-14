@@ -43,6 +43,8 @@ export default function ROICalculator() {
   const [employees, setEmployees] = useState(15);
   const [hourlyRate, setHourlyRate] = useState(50);
   const [hoursPerWeek, setHoursPerWeek] = useState(8);
+  const [roiEmail, setRoiEmail] = useState("");
+  const [roiEmailStatus, setRoiEmailStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   // Calculations
   const weeklyHoursRecoverable = employees * hoursPerWeek * 0.4;
@@ -53,6 +55,26 @@ export default function ROICalculator() {
     annualSavings > 2500
       ? Math.round(((annualSavings - 2500) / 2500) * 100)
       : 0;
+
+  const handleRoiEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!roiEmail) return;
+    setRoiEmailStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: roiEmail,
+          timeSink: "ROI Calculator estimate",
+          message: `ROI Calculator estimate request.\n\nEmployees: ${employees}\nAvg. hourly cost: $${hourlyRate}\nHours/week on repetitive tasks: ${hoursPerWeek}\n\nEst. monthly savings: ${formatCurrency(employees * hoursPerWeek * hourlyRate * 4.33 * 0.4)}\nEst. annual savings: ${formatCurrency(employees * hoursPerWeek * hourlyRate * 4.33 * 0.4 * 12)}`,
+        }),
+      });
+      setRoiEmailStatus(res.ok ? "sent" : "error");
+    } catch {
+      setRoiEmailStatus("error");
+    }
+  };
 
   const sliderClass =
     "w-full h-1.5 rounded-full appearance-none cursor-pointer accent-[#00C9A7] bg-white/10";
@@ -204,6 +226,37 @@ export default function ROICalculator() {
                     annualized, first year
                   </p>
                 </div>
+
+                {/* Email estimate capture */}
+                {roiEmailStatus === "sent" ? (
+                  <div className="p-4 rounded-xl bg-[#00C9A7]/10 border border-[#00C9A7]/20 text-center">
+                    <p className="text-[#00C9A7] text-sm font-semibold">✓ Estimate sent to your inbox!</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleRoiEmailSubmit} className="flex flex-col gap-2">
+                    <p className="text-[#FAFAF8]/50 text-xs text-center">We&apos;ll send your personalized savings estimate. No spam, ever.</p>
+                    <div className="flex gap-2">
+                      <input
+                        type="email"
+                        required
+                        placeholder="your@email.com"
+                        value={roiEmail}
+                        onChange={(e) => setRoiEmail(e.target.value)}
+                        className="flex-1 px-3 py-2.5 rounded-lg bg-white/10 border border-white/15 text-[#FAFAF8] placeholder-[#FAFAF8]/30 text-sm focus:outline-none focus:border-[#00C9A7] transition"
+                      />
+                      <button
+                        type="submit"
+                        disabled={roiEmailStatus === "sending"}
+                        className="px-4 py-2.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold text-sm hover:bg-[#00a88c] transition-colors disabled:opacity-50 whitespace-nowrap"
+                      >
+                        {roiEmailStatus === "sending" ? "…" : "Email Me This"}
+                      </button>
+                    </div>
+                    {roiEmailStatus === "error" && (
+                      <p className="text-red-400 text-xs text-center">Failed to send. Please try again.</p>
+                    )}
+                  </form>
+                )}
 
                 {/* CTA */}
                 <a

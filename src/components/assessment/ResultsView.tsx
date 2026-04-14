@@ -146,16 +146,27 @@ export default function ResultsView({
         </div>
       )}
 
-      <div className="flex flex-col sm:flex-row items-center gap-4 justify-center mt-2">
+      {/* Prominent CTA */}
+      <div className="mt-10 pt-8 border-t border-white/10 text-center">
+        <h3 className="text-xl font-bold text-[#FAFAF8] mb-2">
+          Want to talk through your results?
+        </h3>
+        <p className="text-[#FAFAF8]/60 text-sm mb-6 max-w-md mx-auto">
+          Book a free 30-minute discovery call. We&apos;ll walk through your score,
+          identify your biggest automation opportunities, and map out next steps.
+        </p>
         <a
           href={SITE_CONFIG.calendlyUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-7 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-semibold text-base hover:bg-[#00a88c] transition-colors duration-200 shadow-lg shadow-[#00C9A7]/20"
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-[#00C9A7] text-[#0F1B2D] font-bold text-base hover:bg-[#00a88c] transition-colors duration-200 shadow-lg shadow-[#00C9A7]/20"
         >
           <Calendar size={18} />
           Book a Free Discovery Call
         </a>
+      </div>
+
+      <div className="flex items-center justify-center mt-6">
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 text-[#FAFAF8]/65 font-medium text-sm hover:text-[#FAFAF8] transition-colors underline underline-offset-4 decoration-[#FAFAF8]/30 hover:decoration-[#FAFAF8]/60"

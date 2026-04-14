@@ -22,7 +22,7 @@ interface Step {
 const steps: Step[] = [
   {
     number: "01",
-    title: "Assessment",
+    title: "$499 Deep-Dive Assessment",
     price: "$499",
     description: "Understand your operations.",
     detail:
@@ -41,7 +41,7 @@ const steps: Step[] = [
   {
     number: "03",
     title: "Optimization Retainer",
-    price: "Flexible monthly plans — most clients start under $2k/mo",
+    price: "Flexible monthly support — scaled to your business, no long-term contract",
     description: "Stay ahead, continuously.",
     detail:
       "Ongoing support, new builds, staff training, and quarterly reviews. Your automations improve as your business grows.",
@@ -98,8 +98,45 @@ export default function HowItWorks() {
           </p>
         </FadeUp>
 
+        {/* Start Here card — free entry point */}
+        <FadeUp delay={0.08}>
+          <div className="relative mb-6 p-7 rounded-2xl border border-dashed border-[#00C9A7]/40 bg-[#00C9A7]/[0.04] hover:border-[#00C9A7]/70 transition-colors duration-300">
+            <div className="flex items-start justify-between mb-3">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00C9A7]/15 text-[#00C9A7] text-xs font-bold uppercase tracking-wider">
+                ✦ Start Here
+              </span>
+              <span className="text-xs font-semibold text-[#00C9A7]/60 tracking-wide uppercase">Free</span>
+            </div>
+            <p className="text-base font-medium text-[#FAFAF8]/80 mb-4">
+              Take the free scorecard or book a discovery call — no commitment, no cost.
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href="/assessment"
+                className="text-[#00C9A7] text-sm font-semibold hover:underline underline-offset-4 transition"
+              >
+                Take the Scorecard →
+              </a>
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#00C9A7] text-sm font-semibold hover:underline underline-offset-4 transition"
+              >
+                Book a Call →
+              </a>
+            </div>
+            {/* Arrow pointing down to paid steps */}
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full border border-white/20 bg-[#0F1B2D] flex items-center justify-center z-10" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 2v8M3 7l3 3 3-3" stroke="#00C9A7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </div>
+        </FadeUp>
+
         {/* Steps grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4">
           {steps.map((step, i) => (
             <FadeUp key={step.number} delay={0.1 + i * 0.12}>
               <div className="relative h-full flex flex-col p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#00C9A7]/40 transition-colors duration-300 group">

@@ -6,7 +6,6 @@ import {
   getLowestDimension,
   getDimensionLabel,
   getRecommendations,
-  Tier,
 } from "@/lib/assessment/scoring";
 import { PainPoint } from "@/lib/assessment/questions";
 
@@ -82,7 +81,6 @@ export async function GET(req: NextRequest) {
     const { subject, html } = day3Email({
       name: lead.name,
       overall: lead.overall_score,
-      tier: lead.tier as Tier,
       lowestDimensionLabel: getDimensionLabel(lowest),
       topRecommendation: recs[0],
     });

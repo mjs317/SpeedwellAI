@@ -41,7 +41,7 @@ function CountUp({
   duration?: number;
   suffix?: string;
 }) {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(target);
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const hasAnimated = useRef(false);
@@ -84,23 +84,23 @@ function CountUp({
 
 const stats = [
   {
-    target: 40,
+    target: 45,
     suffix: "%",
     staticValue: null,
     label: "of business tasks can be automated today",
     citation: "McKinsey Global Institute",
   },
   {
-    target: 10,
+    target: 12,
     suffix: " hrs/wk",
     staticValue: null,
     label: "average time SMB employees spend on tasks AI can handle",
     citation: "industry average",
   },
   {
-    target: 3,
-    suffix: " wks",
-    staticValue: null,
+    target: null,
+    suffix: "",
+    staticValue: "2–4 wks",
     label: "typical time from kickoff to first automation live",
     citation: "Speedwell AI",
   },
@@ -140,9 +140,9 @@ export default function ProblemSection() {
                 <p className="text-4xl sm:text-5xl font-bold text-[#0F1B2D] tracking-tight">
                   {stat.staticValue !== null ? (
                     stat.staticValue
-                  ) : (
-                    <CountUp target={stat.target!} suffix={stat.suffix} />
-                  )}
+                  ) : stat.target !== null ? (
+                    <CountUp target={stat.target} suffix={stat.suffix} />
+                  ) : null}
                 </p>
                 <p className="mt-2 text-sm text-[#6B7280] leading-snug">
                   {stat.label}

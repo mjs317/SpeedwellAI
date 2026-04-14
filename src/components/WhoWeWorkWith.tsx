@@ -2,10 +2,6 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { SITE_CONFIG } from "@/lib/config";
-
-const CALENDLY_URL = SITE_CONFIG.calendlyUrl;
-
 // ─── Persona data ─────────────────────────────────────────────────────────────
 
 const personas = [
@@ -15,6 +11,7 @@ const personas = [
     description:
       "You're doing the work of three people. You know there's a better way — you just haven't had the time to find it. We do the finding for you.",
     services: ["CRM & Lead Follow-Up", "Scheduling & Calendar", "Invoice Processing"],
+    ctaHref: "/assessment?utm_source=persona&utm_content=overwhelmed-owner",
   },
   {
     number: "02",
@@ -22,6 +19,7 @@ const personas = [
     description:
       "Your team is sharp but stretched thin. You need leverage, not more headcount. AI automation is the multiplier you've been looking for.",
     services: ["Reporting & Data", "Email Triage", "Customer Onboarding"],
+    ctaHref: "/assessment?utm_source=persona&utm_content=lean-ops",
   },
   {
     number: "03",
@@ -29,6 +27,7 @@ const personas = [
     description:
       "You've grown fast and your processes haven't kept up. We help you systematize what's working so your team can focus on what's next.",
     services: ["CRM & Lead Follow-Up", "Customer Onboarding", "Reporting & Data"],
+    ctaHref: "/assessment?utm_source=persona&utm_content=scaling-company",
   },
 ];
 
@@ -120,12 +119,10 @@ export default function WhoWeWorkWith() {
 
                 {/* CTA */}
                 <a
-                  href={CALENDLY_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={persona.ctaHref}
                   className="text-[#00C9A7] text-sm font-semibold hover:underline underline-offset-4 transition"
                 >
-                  Book a Free Discovery Call →
+                  See what we&apos;d automate for you →
                 </a>
               </div>
             </FadeUp>

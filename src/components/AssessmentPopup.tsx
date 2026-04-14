@@ -212,7 +212,7 @@ export default function AssessmentPopup() {
             </h2>
 
             <p className="text-sm text-[#FAFAF8]/70 leading-relaxed mb-6">
-              Take our 8-question AI Readiness Assessment and get a personalized
+              Take our free AI Readiness Scorecard and get a personalized
               report with your score and 2&ndash;3 specific automations to start
               with. Delivered to your inbox in seconds.
             </p>

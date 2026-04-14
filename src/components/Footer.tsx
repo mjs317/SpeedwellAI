@@ -9,20 +9,22 @@ const quickLinks = [
   { label: "About", href: "#about" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "#contact" },
+  { label: "Privacy Policy", href: "/privacy" },
 ];
 
-function LinkedInIcon({ size = 16 }: { size?: number }) {
+// Construct email from parts to avoid Cloudflare email obfuscation
+function EmailLink() {
+  const user = "hello";
+  const domain = "speedwellai.com";
+  const email = `${user}@${domain}`;
+
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
+    <a
+      href={`mailto:${email}`}
+      className="text-sm text-[#FAFAF8]/40 hover:text-[#FAFAF8]/80 transition-colors break-all"
     >
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-    </svg>
+      {email}
+    </a>
   );
 }
 
@@ -41,7 +43,7 @@ export default function Footer() {
               AI automation for small and mid-sized businesses.
             </p>
             <p className="text-xs text-[#FAFAF8]/25 mt-auto">
-              © 2025 Speedwell AI. All rights reserved.
+              © 2025–2026 Speedwell AI. All rights reserved.
             </p>
           </div>
 
@@ -70,25 +72,8 @@ export default function Footer() {
               Get in Touch
             </p>
             <div className="flex flex-col gap-3">
-              {/* Email */}
-              <a
-                href={`mailto:${SITE_CONFIG.email}`}
-                className="text-sm text-[#FAFAF8]/40 hover:text-[#FAFAF8]/80 transition-colors break-all"
-              >
-                hello@speedwellai.com
-              </a>
-
-              {/* LinkedIn */}
-              <a
-                href={SITE_CONFIG.linkedInUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Michael Solimini on LinkedIn"
-                className="inline-flex items-center gap-2 text-sm text-[#FAFAF8]/40 hover:text-[#00C9A7] transition-colors duration-200"
-              >
-                <LinkedInIcon size={14} />
-                LinkedIn
-              </a>
+              {/* Email — rendered via component to avoid Cloudflare obfuscation */}
+              <EmailLink />
 
               {/* Book a call CTA */}
               <a

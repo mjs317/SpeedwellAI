@@ -35,6 +35,7 @@ function FadeUp({
 
 const testimonials = [
   {
+    statHeadline: "Follow-up rate: 40% → nearly 100%",
     quote:
       "We were losing leads because we couldn't follow up fast enough — a customer would fill out the form on our site and wouldn't hear back for hours, sometimes a full day. Speedwell built us an automated system that qualifies the lead, sends a personalized follow-up within minutes, and books them directly onto our technicians' calendars. We went from maybe 40% follow-up rate to close to 100%, and we're booking more jobs without adding office staff. The whole thing was up and running in under three weeks.",
     name: "Miles N.",
@@ -44,6 +45,7 @@ const testimonials = [
     automations: ["CRM & Lead Follow-Up", "Scheduling"],
   },
   {
+    statHeadline: "15+ hours/week of manual work → automated",
     quote:
       "Our business is extremely seasonal — we go from quiet to hundreds of pickups and deliveries in a two-week window. Before Speedwell, our team was buried in spreadsheets trying to track sign-ups, schedule box drop-offs, and coordinate moves across multiple campuses. They automated our entire customer onboarding flow — from sign-up confirmation to box delivery scheduling to move-day reminders — and built us a reporting dashboard that pulls everything together in one place. What used to take our team 15+ hours a week of manual coordination basically runs itself now.",
     name: "Mike S.",
@@ -75,6 +77,11 @@ export default function Results() {
           {testimonials.map((t, i) => (
             <FadeUp key={t.company} delay={0.1 + i * 0.12}>
               <div className="flex flex-col h-full p-7 rounded-2xl border border-white/10 bg-white/[0.04]">
+                {/* Stat headline */}
+                <p className="text-xl sm:text-2xl font-bold text-[#00C9A7] mb-4 leading-tight">
+                  {t.statHeadline}
+                </p>
+
                 {/* Decorative quote mark */}
                 <svg
                   className="mb-4 text-[#00C9A7]/40 flex-shrink-0"
