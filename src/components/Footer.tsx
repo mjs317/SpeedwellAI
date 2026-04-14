@@ -4,11 +4,11 @@ import { SpeedwellLogo } from "@/components/SpeedwellLogo";
 import { SITE_CONFIG } from "@/lib/config";
 
 const quickLinks = [
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/#about" },
   { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 function LinkedInIcon({ size = 16 }: { size?: number }) {
@@ -83,7 +83,7 @@ export default function Footer() {
                 href={SITE_CONFIG.linkedInUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Michael Solimini on LinkedIn"
+                aria-label="Speedwell AI on LinkedIn"
                 className="inline-flex items-center gap-2 text-sm text-[#FAFAF8]/40 hover:text-[#00C9A7] transition-colors duration-200"
               >
                 <LinkedInIcon size={14} />

@@ -90,7 +90,7 @@ export function reportEmail(input: ReportEmailInput): {
     <p>Your full report is attached.</p>
     <p>Want to talk through your results?</p>
     <p>${ctaButton("Book a Free Discovery Call", SITE_CONFIG.calendlyUrl)}</p>
-    <p style="margin-top:32px;">— Michael, Speedwell AI</p>
+    <p style="margin-top:32px;">— Speedwell AI</p>
   `);
   return { subject, html };
 }
@@ -121,7 +121,7 @@ export function day3Email(input: Day3EmailInput): {
     <p>Most businesses at your stage see results within the first 2–3 weeks of implementation. The key is starting with one high-impact workflow rather than trying to automate everything at once.</p>
     <p>If you want to explore what that first workflow could be, I'd be happy to walk through it:</p>
     <p>${ctaButton("Book a Discovery Call", SITE_CONFIG.calendlyUrl)}</p>
-    <p style="margin-top:32px;">— Michael, Speedwell AI</p>
+    <p style="margin-top:32px;">— Speedwell AI</p>
   `);
   return { subject, html };
 }
@@ -145,7 +145,7 @@ export function day7Email(input: Day7EmailInput): {
     <p>Happy to chat if it would help:</p>
     <p>${ctaButton("Book a Call", SITE_CONFIG.calendlyUrl)}</p>
     <p>Either way, no pressure. Just wanted to make sure the report was useful.</p>
-    <p style="margin-top:32px;">— Michael, Speedwell AI</p>
+    <p style="margin-top:32px;">— Speedwell AI</p>
   `);
   return { subject, html };
 }

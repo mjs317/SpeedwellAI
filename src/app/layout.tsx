@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.png", type: "image/png" },
-      { url: "/favicon.ico" }, // fallback for older browsers
+      { url: "/favicon.svg", type: "image/svg+xml" },
     ],
   },
 };
@@ -75,7 +75,7 @@ const jsonLd = {
       name: SITE_CONFIG.siteName,
       description: SITE_CONFIG.siteDescription,
       url: SITE_CONFIG.siteUrl,
-      founder: { "@type": "Person", name: SITE_CONFIG.founderName },
+      founder: { "@type": "Organization", name: "Speedwell AI" },
       serviceType: "AI Automation Consulting",
       areaServed: "United States",
       priceRange: "$499 – $20,000",
